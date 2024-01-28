@@ -6,6 +6,8 @@ import ru.homelab.out.Menu;
 import ru.homelab.out.ShowValueMeters;
 import ru.homelab.security.Authorization;
 import ru.homelab.security.CreateNewUser;
+import ru.homelab.utils.log.Audit;
+import ru.homelab.utils.log.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,6 +67,7 @@ public class Main {
                 case 0:
                     break;
                 case 1:
+                    Logger.log(login, Audit.VIEW_CURRENT_READINGS);
                     System.out.println("Текущие показания счётчиков:");
                     showValueMeters.currentValuesMeters(login, Table.HEATING, NameMeter.HEATING);
                     showValueMeters.currentValuesMeters(login, Table.WATER_COLD, NameMeter.WATER_COLD);
@@ -75,6 +78,7 @@ public class Main {
                     addValueMenu(login, inputConsole, menu, showValueMeters);
                     break;
                 case 3:
+                    Logger.log(login, Audit.VIEWING_READINGS_FOR_THE_MONTH);
                     int month = inputConsole.enterTheMonthNumber();
                     showValueMeters.valueForMonth(login, month, Table.HEATING, NameMeter.HEATING);
                     showValueMeters.valueForMonth(login, month, Table.WATER_COLD, NameMeter.WATER_COLD);
@@ -82,6 +86,7 @@ public class Main {
                     menu.exitMainMenu();
                     break;
                 case 4:
+                    Logger.log(login, Audit.GETTING_HISTORY_OF_GIVING_TESTIMONY);
                     showValueMeters.allValues(login, Table.HEATING, NameMeter.HEATING);
                     showValueMeters.allValues(login, Table.WATER_COLD, NameMeter.WATER_COLD);
                     showValueMeters.allValues(login, Table.WATER_HOT, NameMeter.WATER_HOT);
@@ -115,7 +120,8 @@ public class Main {
     }
 
     private static void createNewUser(CreateNewUser createNewUser, Menu menu) {
-        createNewUser.createNewUser();
+        User user = createNewUser.createNewUser();
+        Logger.log(user.login(), Audit.CREATE_NEW_USER);
         System.out.println("success");
         menu.exitMenu();
     }
@@ -130,12 +136,15 @@ public class Main {
                 case 0:
                     break;
                 case 1:
+                    Logger.log(login, Audit.GIVING_EVIDENCE);
                     showValueMeters.addValue(login, Table.HEATING, NameMeter.HEATING);
                     break;
                 case 2:
+                    Logger.log(login, Audit.GIVING_EVIDENCE);
                     showValueMeters.addValue(login, Table.WATER_COLD, NameMeter.WATER_COLD);
                     break;
                 case 3:
+                    Logger.log(login, Audit.GIVING_EVIDENCE);
                     showValueMeters.addValue(login, Table.WATER_HOT, NameMeter.WATER_HOT);
                     break;
                 default:
@@ -147,6 +156,7 @@ public class Main {
     private static void init() {
         User user = new User("user", Role.USER, "user");
         Table.USERS.put(user.login(), user);
+        Table.LOGGER.put(user.login(), new ArrayList<>());
 
         List<Integer> heating = new ArrayList<>(
                 Arrays.asList(12, 25, 44, 57, 74, 82, 91, 105, 120, 132, 149, 160));
@@ -165,5 +175,6 @@ public class Main {
 
         User admin = new User("admin", Role.ADMIN, "admin");
         Table.USERS.put(admin.login(), admin);
+        Table.LOGGER.put(admin.login(), new ArrayList<>());
     }
 }

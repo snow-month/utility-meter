@@ -1,6 +1,6 @@
 package ru.homelab.model;
 
-import ru.homelab.utils.log.Audit;
+import ru.homelab.utils.log.Message;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +10,7 @@ public class Table {
     public static final Map<String, Meter> HEATING = new HashMap<>();
     public static final Map<String, Meter> WATER_HOT = new HashMap<>();
     public static final Map<String, Meter> WATER_COLD = new HashMap<>();
-    public static final Map<String, List<Audit>> LOGGER = new HashMap<>();
+    public static final Map<String, List<Message>> LOGGER = new HashMap<>();
     /**
      * таблица user
      */
