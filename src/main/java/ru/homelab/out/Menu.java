@@ -3,13 +3,24 @@ package ru.homelab.out;
 import ru.homelab.in.InputConsole;
 import ru.homelab.model.User;
 
+/**
+ * The type Menu.
+ */
 public class Menu {
     private final InputConsole inputConsole;
 
+    /**
+     * Instantiates a new Menu.
+     *
+     * @param inputConsole the input console
+     */
     public Menu(InputConsole inputConsole) {
         this.inputConsole = inputConsole;
     }
 
+    /**
+     * Greeting menu.
+     */
     public static void greetingMenu() {
         System.out.println("Greeting menu:");
         System.out.println("Default:");
@@ -21,6 +32,11 @@ public class Menu {
         System.out.println("0 - exit");
     }
 
+    /**
+     * Main menu user.
+     *
+     * @param user the user
+     */
     public static void mainMenuUser(User user) {
         System.out.println("user: " + user.login());
         System.out.println("Main menu:");
@@ -32,6 +48,11 @@ public class Menu {
         System.out.println("0 - logout");
     }
 
+    /**
+     * Main menu admin.
+     *
+     * @param user the user
+     */
     public static void mainMenuAdmin(User user) {
         System.out.println("user: " + user.login() + ", role: ADMIN");
         System.out.println("Main menu:");
@@ -40,6 +61,11 @@ public class Menu {
         System.out.println("0 - logout");
     }
 
+    /**
+     * Add value menu.
+     *
+     * @param login the login
+     */
     public static void addValueMenu(String login) {
         System.out.println("user: " + login);
         System.out.println("Add value menu:");
@@ -50,26 +76,41 @@ public class Menu {
         System.out.println("0 - Main menu");
     }
 
+    /**
+     * Exit menu.
+     */
     public void exitMenu() {
         System.out.println("0 - exit menu");
         inputConsole.readingNumber();
     }
 
+    /**
+     * Exit main menu.
+     */
     public void exitMainMenu() {
         System.out.println("0 - Main menu");
         inputConsole.readingNumber();
     }
 
+    /**
+     * Exit add value menu.
+     */
     public void exitAddValueMenu() {
         System.out.println("0 - Add value menu");
         inputConsole.readingNumber();
     }
 
+    /**
+     * No such point.
+     */
     public void noSuchPoint() {
         System.out.println("No such point");
         exitMenu();
     }
 
+    /**
+     * Incorrect username or password.
+     */
     public void incorrectUsernameOrPassword() {
         System.out.println("Incorrect username or password");
         exitMenu();

@@ -2,15 +2,27 @@ package ru.homelab.model;
 
 import java.util.*;
 
+/**
+ * The type Meter.
+ */
 public class MeterImpl implements Meter {
     private final Map<Integer, List<Integer>> meter = new HashMap<>();
     private Integer currentValue;
     private final Calendar calendar = Calendar.getInstance();
 
+    /**
+     * Instantiates a new Meter.
+     */
     public MeterImpl() {
     }
 
-    // Чтобы заполнить тестовыми данными для user
+    /**
+     * Instantiates a new Meter.
+     *
+     * @param year   the year
+     * @param values the values
+     */
+// Чтобы заполнить тестовыми данными для user
     public MeterImpl(int year, List<Integer> values) {
         meter.put(year, values);
         currentValue = values.get(values.size() - 1);

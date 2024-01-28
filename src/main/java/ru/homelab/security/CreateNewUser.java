@@ -8,13 +8,26 @@ import ru.homelab.model.User;
 
 import java.util.ArrayList;
 
+/**
+ * The type Create new user.
+ */
 public class CreateNewUser {
     private final InputConsole inputConsole;
 
+    /**
+     * Instantiates a new Create new user.
+     *
+     * @param inputConsole the input console
+     */
     public CreateNewUser(InputConsole inputConsole) {
         this.inputConsole = inputConsole;
     }
 
+    /**
+     * Create new user user.
+     *
+     * @return the user
+     */
     public User createNewUser() {
         System.out.println("Создание нового пользователя");
         System.out.println("Введите логин");

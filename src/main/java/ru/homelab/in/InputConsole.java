@@ -5,12 +5,26 @@ import ru.homelab.model.Table;
 
 import java.util.Scanner;
 
+
+/**
+ * The type Input console.
+ */
 public class InputConsole {
+    /**
+     * Enter the month number int.
+     *
+     * @return the int
+     */
     public int enterTheMonthNumber() {
         System.out.println("Введите номер месяца (1-12)");
         return readingNumber();
     }
 
+    /**
+     * Enter user string.
+     *
+     * @return the string
+     */
     public String enterUser() {
         String login;
         do {
@@ -29,6 +43,11 @@ public class InputConsole {
         return login;
     }
 
+    /**
+     * Reading number int.
+     *
+     * @return the int
+     */
     public int readingNumber() {
         Scanner scanner = new Scanner(System.in);
         int point;
@@ -45,6 +64,11 @@ public class InputConsole {
         return point;
     }
 
+    /**
+     * Reading str string.
+     *
+     * @return the string
+     */
     public String readingStr() {
         Scanner scanner = new Scanner(System.in);
         return scanner.next();

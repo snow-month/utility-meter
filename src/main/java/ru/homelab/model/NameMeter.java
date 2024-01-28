@@ -1,5 +1,19 @@
 package ru.homelab.model;
 
+/**
+ * The enum Name meter.
+ */
 public enum NameMeter {
-    HEATING, WATER_HOT, WATER_COLD
+    /**
+     * Heating name meter.
+     */
+    HEATING,
+    /**
+     * Water hot name meter.
+     */
+    WATER_HOT,
+    /**
+     * Water cold name meter.
+     */
+    WATER_COLD
 }

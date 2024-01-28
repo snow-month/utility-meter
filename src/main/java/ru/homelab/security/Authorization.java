@@ -4,18 +4,36 @@ import ru.homelab.in.InputConsole;
 import ru.homelab.model.Table;
 import ru.homelab.model.User;
 
+/**
+ * The type Authorization.
+ */
 public class Authorization {
     private User user;
     private final InputConsole inputConsole;
 
+    /**
+     * Instantiates a new Authorization.
+     *
+     * @param inputConsole the input console
+     */
     public Authorization(InputConsole inputConsole) {
         this.inputConsole = inputConsole;
     }
 
+    /**
+     * Current user user.
+     *
+     * @return the user
+     */
     public User currentUser() {
         return user;
     }
 
+    /**
+     * Authorization boolean.
+     *
+     * @return the boolean
+     */
     public boolean authorization() {
         System.out.println("Ваш логин");
         String login = inputConsole.readingStr();
@@ -36,6 +54,9 @@ public class Authorization {
         return false;
     }
 
+    /**
+     * Logout.
+     */
     public void logout() {
         user = null;
     }
