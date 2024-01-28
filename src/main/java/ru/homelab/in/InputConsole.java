@@ -16,7 +16,7 @@ public class InputConsole {
      * @return the int
      */
     public int enterTheMonthNumber() {
-        System.out.println("Введите номер месяца (1-12)");
+        System.out.println("Enter the month number (1-12)");
         return readingNumber();
     }
 
@@ -28,7 +28,7 @@ public class InputConsole {
     public String enterUser() {
         String login;
         do {
-            System.out.println("Для просмотра показаний пользователей введите имя пользоателя и нажмите энтер");
+            System.out.println("To view user readings, enter the user name and click enter");
             Table.USERS.entrySet().stream()
                     .filter(stringUserEntry ->
                             !stringUserEntry.getValue().role().equals(Role.ADMIN))
@@ -37,7 +37,7 @@ public class InputConsole {
             System.out.println();
             login = readingStr();
             if (!Table.USERS.containsKey(login)) {
-                System.out.println("нет такого пользователя");
+                System.out.println("there is no such user");
             }
         } while (!Table.USERS.containsKey(login));
         return login;

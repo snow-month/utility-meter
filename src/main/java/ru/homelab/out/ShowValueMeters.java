@@ -35,7 +35,7 @@ public class ShowValueMeters {
     public void currentValuesMeters(String login, Map<String, Meter> map, NameMeter meter) {
         Integer value = map.get(login).currentValue();
         if (value == null) {
-            System.out.println(meter.name() + ": нет показаний");
+            System.out.println(meter.name() + ": There is no indication");
         } else {
             System.out.println(meter.name() + ": " + value);
         }
@@ -49,12 +49,12 @@ public class ShowValueMeters {
      * @param meter the meter
      */
     public void addValue(String login, Map<String, Meter> map, NameMeter meter) {
-        System.out.println("Введите показание счётчика " + meter.name() + ":");
+        System.out.println("Enter the meter reading " + meter.name() + ":");
         boolean addValue = map.get(login).addValue(inputConsole.readingNumber());
         if (addValue) {
-            System.out.println("Показания добавлены.");
+            System.out.println("Readings added");
         } else {
-            System.out.println("Показания можно добавлять раз в месяц");
+            System.out.println("Readings can be added once a month");
         }
         menu.exitAddValueMenu();
     }
@@ -70,7 +70,7 @@ public class ShowValueMeters {
     public void valueForMonth(String login, int month, Map<String, Meter> map,
                               NameMeter meter) {
         int value = map.get(login).valueForMonth(month - 1);
-        System.out.println("Показание за месяц " + (month + 1) + " " + meter.name() + ": "
+        System.out.println("Monthly reading " + (month + 1) + " " + meter.name() + ": "
                 + value);
     }
 
@@ -82,7 +82,7 @@ public class ShowValueMeters {
      * @param meter the meter
      */
     public void allValues(String login, Map<String, Meter> map, NameMeter meter) {
-        System.out.println("История подачи показаний " + meter.name() + ":");
+        System.out.println("The history of giving evidence " + meter.name() + ":");
         Map<Integer, List<Integer>> allValuesHeating = map.get(login).allValues();
         for (Map.Entry<Integer, List<Integer>> entry : allValuesHeating.entrySet()) {
             System.out.println(entry.getKey());
