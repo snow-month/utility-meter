@@ -29,19 +29,19 @@ public class CreateNewUser {
      * @return the user
      */
     public User createNewUser() {
-        System.out.println("Создание нового пользователя");
-        System.out.println("Введите логин");
+        System.out.println("Creating a new user");
+        System.out.println("Enter login");
         String login = inputConsole.readingStr();
 
         String password;
         String confirmation;
         do {
-            System.out.println("Введите пароль");
+            System.out.println("Enter password");
             password = inputConsole.readingStr();
-            System.out.println("Потвердите пароль");
+            System.out.println("Confirm the password");
             confirmation = inputConsole.readingStr();
             if (!password.equals(confirmation)) {
-                System.out.println("Пароли не совпадают");
+                System.out.println("Passwords don't match");
             }
         } while (!password.equals(confirmation));
 

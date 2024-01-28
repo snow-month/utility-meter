@@ -35,9 +35,9 @@ public class Authorization {
      * @return the boolean
      */
     public boolean authorization() {
-        System.out.println("Ваш логин");
+        System.out.println("login:");
         String login = inputConsole.readingStr();
-        System.out.println("Введите пароль");
+        System.out.println("password:");
         String password = inputConsole.readingStr();
 
         User userTable;
