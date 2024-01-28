@@ -7,18 +7,24 @@ import ru.homelab.model.Table;
 import ru.homelab.model.User;
 
 public class CreateNewUser {
+    private final InputConsole inputConsole;
+
+    public CreateNewUser(InputConsole inputConsole) {
+        this.inputConsole = inputConsole;
+    }
+
     public boolean createNewUser() {
         System.out.println("Создание нового пользователя");
         System.out.println("Введите логин");
-        String login = InputConsole.readingStr();
+        String login = inputConsole.readingStr();
 
         String password;
         String confirmation;
         do {
             System.out.println("Введите пароль");
-            password = InputConsole.readingStr();
+            password = inputConsole.readingStr();
             System.out.println("Потвердите пароль");
-            confirmation = InputConsole.readingStr();
+            confirmation = inputConsole.readingStr();
             if (!password.equals(confirmation)) {
                 System.out.println("Пароли не совпадают");
             }

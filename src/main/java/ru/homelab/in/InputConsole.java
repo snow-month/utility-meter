@@ -1,9 +1,35 @@
 package ru.homelab.in;
 
+import ru.homelab.model.Role;
+import ru.homelab.model.Table;
+
 import java.util.Scanner;
 
 public class InputConsole {
-    public static int readingNumber() {
+    public int enterTheMonthNumber() {
+        System.out.println("Введите номер месяца (1-12)");
+        return readingNumber();
+    }
+
+    public String enterUser() {
+        String login;
+        do {
+            System.out.println("Для просмотра показаний пользователей введите имя пользоателя и нажмите энтер");
+            Table.USERS.entrySet().stream()
+                    .filter(stringUserEntry ->
+                            !stringUserEntry.getValue().role().equals(Role.ADMIN))
+                    .forEach(stringUserEntry ->
+                            System.out.print(stringUserEntry.getKey() + " "));
+            System.out.println();
+            login = readingStr();
+            if (!Table.USERS.containsKey(login)) {
+                System.out.println("нет такого пользователя");
+            }
+        } while (!Table.USERS.containsKey(login));
+        return login;
+    }
+
+    public int readingNumber() {
         Scanner scanner = new Scanner(System.in);
         int point;
 
@@ -19,7 +45,7 @@ public class InputConsole {
         return point;
     }
 
-    public static String readingStr() {
+    public String readingStr() {
         Scanner scanner = new Scanner(System.in);
         return scanner.next();
     }

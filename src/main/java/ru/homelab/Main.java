@@ -14,26 +14,132 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        Authorization authorization = new Authorization();
-        CreateNewUser createNewUser = new CreateNewUser();
+        InputConsole inputConsole = new InputConsole();
+        Menu menu = new Menu(inputConsole);
+        ShowValueMeters showValueMeters = new ShowValueMeters(inputConsole, menu);
+        Authorization authorization = new Authorization(inputConsole);
+        CreateNewUser createNewUser = new CreateNewUser(inputConsole);
         init();
 
         int point;
         do {
             Menu.greetingMenu();
-            point = InputConsole.readingNumber();
+            point = inputConsole.readingNumber();
             switch (point) {
                 case 0:
                     break;
                 case 1:
-                    authorization(authorization);
+                    authorization(authorization, inputConsole, menu, showValueMeters);
                     break;
                 case 2:
-                    createNewUser(createNewUser);
+                    createNewUser(createNewUser, menu);
                     break;
                 default:
-                    System.out.println("Неверный пункт");
-                    Menu.exitGreetingMenu();
+                    menu.noSuchPoint();
+            }
+        } while (point != 0);
+    }
+
+    private static void authorization(Authorization authorization, InputConsole inputConsole,
+                                      Menu menu, ShowValueMeters showValueMeters) {
+        boolean auth = authorization.authorization();
+        if (auth) {
+            if (authorization.currentUser().role().equals(Role.USER)) {
+                userMenu(authorization, inputConsole, menu, showValueMeters);
+            } else {
+                adminMenu(authorization, inputConsole, menu, showValueMeters);
+            }
+        } else {
+            menu.incorrectUsernameOrPassword();
+        }
+    }
+
+    private static void userMenu(Authorization authorization, InputConsole inputConsole,
+                                 Menu menu, ShowValueMeters showValueMeters) {
+        int point;
+        do {
+            Menu.mainMenuUser(authorization.currentUser());
+            point = inputConsole.readingNumber();
+            String login = authorization.currentUser().login();
+            switch (point) {
+                case 0:
+                    break;
+                case 1:
+                    System.out.println("Текущие показания счётчиков:");
+                    showValueMeters.currentValuesMeters(login, Table.HEATING, NameMeter.HEATING);
+                    showValueMeters.currentValuesMeters(login, Table.WATER_COLD, NameMeter.WATER_COLD);
+                    showValueMeters.currentValuesMeters(login, Table.WATER_HOT, NameMeter.WATER_HOT);
+                    menu.exitMainMenu();
+                    break;
+                case 2:
+                    addValueMenu(login, inputConsole, menu, showValueMeters);
+                    break;
+                case 3:
+                    int month = inputConsole.enterTheMonthNumber();
+                    showValueMeters.valueForMonth(login, month, Table.HEATING, NameMeter.HEATING);
+                    showValueMeters.valueForMonth(login, month, Table.WATER_COLD, NameMeter.WATER_COLD);
+                    showValueMeters.valueForMonth(login, month, Table.WATER_HOT, NameMeter.WATER_HOT);
+                    menu.exitMainMenu();
+                    break;
+                case 4:
+                    showValueMeters.allValues(login, Table.HEATING, NameMeter.HEATING);
+                    showValueMeters.allValues(login, Table.WATER_COLD, NameMeter.WATER_COLD);
+                    showValueMeters.allValues(login, Table.WATER_HOT, NameMeter.WATER_HOT);
+                    menu.exitMainMenu();
+                    break;
+                default:
+                    menu.noSuchPoint();
+            }
+        } while (point != 0);
+    }
+
+    private static void adminMenu(Authorization authorization, InputConsole inputConsole,
+                                  Menu menu, ShowValueMeters showValueMeters) {
+        int point;
+        do {
+            Menu.mainMenuAdmin(authorization.currentUser());
+            point = inputConsole.readingNumber();
+            switch (point) {
+                case 0:
+                    break;
+                case 1:
+                    String login = inputConsole.enterUser();
+                    showValueMeters.allValues(login, Table.HEATING, NameMeter.HEATING);
+                    showValueMeters.allValues(login, Table.WATER_COLD, NameMeter.WATER_COLD);
+                    showValueMeters.allValues(login, Table.WATER_HOT, NameMeter.WATER_HOT);
+                    menu.exitMainMenu();
+                    break;
+                default:
+            }
+        } while (point != 0);
+    }
+
+    private static void createNewUser(CreateNewUser createNewUser, Menu menu) {
+        createNewUser.createNewUser();
+        System.out.println("success");
+        menu.exitMenu();
+    }
+
+    private static void addValueMenu(String login, InputConsole inputConsole,
+                                     Menu menu, ShowValueMeters showValueMeters) {
+        int point;
+        do {
+            Menu.addValueMenu(login);
+            point = inputConsole.readingNumber();
+            switch (point) {
+                case 0:
+                    break;
+                case 1:
+                    showValueMeters.addValue(login, Table.HEATING, NameMeter.HEATING);
+                    break;
+                case 2:
+                    showValueMeters.addValue(login, Table.WATER_COLD, NameMeter.WATER_COLD);
+                    break;
+                case 3:
+                    showValueMeters.addValue(login, Table.WATER_HOT, NameMeter.WATER_HOT);
+                    break;
+                default:
+                    menu.noSuchPoint();
             }
         } while (point != 0);
     }
@@ -59,120 +165,5 @@ public class Main {
 
         User admin = new User("admin", Role.ADMIN, "admin");
         Table.USERS.put(admin.login(), admin);
-    }
-
-    private static void authorization(Authorization authorization) {
-        boolean auth = authorization.authorization();
-        if (auth) {
-            if (authorization.currentUser().role().equals(Role.USER)) {
-                userMenu(authorization);
-            } else {
-                adminMenu(authorization);
-            }
-        } else {
-            System.out.println("Неправильный логин или пароль");
-            Menu.exitGreetingMenu();
-        }
-    }
-
-    private static void userMenu(Authorization authorization) {
-        int point;
-        do {
-            Menu.mainMenuUser(authorization.currentUser());
-            point = InputConsole.readingNumber();
-            String login = authorization.currentUser().login();
-            switch (point) {
-                case 0:
-                    break;
-                case 1:
-                    System.out.println("Текущие показания счётчиков:");
-                    ShowValueMeters.currentValuesMeters(login, Table.HEATING, NameMeter.HEATING);
-                    ShowValueMeters.currentValuesMeters(login, Table.WATER_COLD, NameMeter.WATER_COLD);
-                    ShowValueMeters.currentValuesMeters(login, Table.WATER_HOT, NameMeter.WATER_HOT);
-                    Menu.exitMainMenu();
-                    break;
-                case 2:
-                    addValueMenu(login);
-                    break;
-                case 3:
-                    System.out.println("Введите номер месяца (1-12)");
-                    int month = InputConsole.readingNumber();
-                    ShowValueMeters.valueForMonth(login, month, Table.HEATING, NameMeter.HEATING);
-                    ShowValueMeters.valueForMonth(login, month, Table.WATER_COLD, NameMeter.WATER_COLD);
-                    ShowValueMeters.valueForMonth(login, month, Table.WATER_HOT, NameMeter.WATER_HOT);
-                    Menu.exitMainMenu();
-                    break;
-                case 4:
-                    ShowValueMeters.allValues(login, Table.HEATING, NameMeter.HEATING);
-                    ShowValueMeters.allValues(login, Table.WATER_COLD, NameMeter.WATER_COLD);
-                    ShowValueMeters.allValues(login, Table.WATER_HOT, NameMeter.WATER_HOT);
-                    Menu.exitMainMenu();
-                    break;
-                default:
-                    System.out.println("Нет такого пункта");
-                    Menu.exitMainMenu();
-            }
-        } while (point != 0);
-    }
-
-    private static void adminMenu(Authorization authorization) {
-        int point;
-        do {
-            Menu.mainMenuAdmin(authorization.currentUser());
-            point = InputConsole.readingNumber();
-            switch (point) {
-                case 0:
-                    break;
-                case 1:
-                    String login;
-                    do {
-                        System.out.println("Для просмотра показаний пользователей введите имя пользоателя и нажмите энтер");
-                        Table.USERS.entrySet().stream()
-                                .filter(stringUserEntry -> !stringUserEntry.getKey().equals("admin"))
-                                .forEach(stringUserEntry -> System.out.print(stringUserEntry.getKey() + " "));
-                        System.out.println();
-                        login = InputConsole.readingStr();
-                        if (!Table.USERS.containsKey(login)) {
-                            System.out.println("нет такого пользователя");
-                        }
-                    } while (!Table.USERS.containsKey(login));
-                    ShowValueMeters.allValues(login, Table.HEATING, NameMeter.HEATING);
-                    ShowValueMeters.allValues(login, Table.WATER_COLD, NameMeter.WATER_COLD);
-                    ShowValueMeters.allValues(login, Table.WATER_HOT, NameMeter.WATER_HOT);
-                    Menu.exitMainMenu();
-                    break;
-                default:
-            }
-        } while (point != 0);
-    }
-
-    private static void createNewUser(CreateNewUser createNewUser) {
-        boolean newUser = createNewUser.createNewUser();
-        System.out.println("успех");
-        Menu.exitGreetingMenu();
-    }
-
-    private static void addValueMenu(String login) {
-        int point;
-        do {
-            Menu.addValueMenu(login);
-            point = InputConsole.readingNumber();
-            switch (point) {
-                case 0:
-                    break;
-                case 1:
-                    ShowValueMeters.addValue(login, Table.HEATING, NameMeter.HEATING);
-                    break;
-                case 2:
-                    ShowValueMeters.addValue(login, Table.WATER_COLD, NameMeter.WATER_COLD);
-                    break;
-                case 3:
-                    ShowValueMeters.addValue(login, Table.WATER_HOT, NameMeter.WATER_HOT);
-                    break;
-                default:
-                    System.out.println("Нет такого пункта");
-                    Menu.exitMainMenu();
-            }
-        } while (point != 0);
     }
 }

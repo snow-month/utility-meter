@@ -6,6 +6,11 @@ import ru.homelab.model.User;
 
 public class Authorization {
     private User user;
+    private final InputConsole inputConsole;
+
+    public Authorization(InputConsole inputConsole) {
+        this.inputConsole = inputConsole;
+    }
 
     public User currentUser() {
         return user;
@@ -13,9 +18,9 @@ public class Authorization {
 
     public boolean authorization() {
         System.out.println("Ваш логин");
-        String login = InputConsole.readingStr();
+        String login = inputConsole.readingStr();
         System.out.println("Введите пароль");
-        String password = InputConsole.readingStr();
+        String password = inputConsole.readingStr();
 
         User userTable;
         if (Table.USERS.containsKey(login)) {

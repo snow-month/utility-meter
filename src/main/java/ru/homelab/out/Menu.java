@@ -4,6 +4,12 @@ import ru.homelab.in.InputConsole;
 import ru.homelab.model.User;
 
 public class Menu {
+    private final InputConsole inputConsole;
+
+    public Menu(InputConsole inputConsole) {
+        this.inputConsole = inputConsole;
+    }
+
     public static void greetingMenu() {
         System.out.println("Greeting menu:");
         System.out.println("Default:");
@@ -44,18 +50,28 @@ public class Menu {
         System.out.println("0 - Main menu");
     }
 
-    public static void exitGreetingMenu() {
-        System.out.println("0 - Greeting menu");
-        InputConsole.readingNumber();
+    public void exitMenu() {
+        System.out.println("0 - exit menu");
+        inputConsole.readingNumber();
     }
 
-    public static void exitMainMenu() {
+    public void exitMainMenu() {
         System.out.println("0 - Main menu");
-        InputConsole.readingNumber();
+        inputConsole.readingNumber();
     }
 
-    public static void exitAddValueMenu() {
+    public void exitAddValueMenu() {
         System.out.println("0 - Add value menu");
-        InputConsole.readingNumber();
+        inputConsole.readingNumber();
+    }
+
+    public void noSuchPoint() {
+        System.out.println("No such point");
+        exitMenu();
+    }
+
+    public void incorrectUsernameOrPassword() {
+        System.out.println("Incorrect username or password");
+        exitMenu();
     }
 }
