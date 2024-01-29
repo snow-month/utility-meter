@@ -25,7 +25,7 @@ Greeting menu:
 Default:
 login: user, password: user, role: USER
 login: admin, password: admin, role: ADMIN
-Выберите пункт и нажмите энтер:
+Select an item and click enter:
 1 - Sign in
 2 - Sign up
 0 - exit
@@ -46,23 +46,7 @@ login: admin, password: admin, role: ADMIN
 Вводим login и password.
 
 ```
-Default:
-login: user, password: user, role: USER
-login: admin, password: admin, role: ADMIN
-Выберите пункт и нажмите энтер:
-1 - Sign in
-2 - Sign up
-0 - exit
-2
-Создание нового пользователя
-Введите логин
-newuser
-Введите пароль
-111
-Потвердите пароль
-111
-success
-0 - exit menu
+
 ```
 Вводим цифру 0 и выходим из меню создания пользователя.
 
