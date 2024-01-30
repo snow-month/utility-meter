@@ -1,23 +1,11 @@
 package ru.homelab.out;
 
-import ru.homelab.in.InputConsole;
 import ru.homelab.model.User;
 
 /**
  * The type Menu.
  */
 public class Menu {
-    private final InputConsole inputConsole;
-
-    /**
-     * Instantiates a new Menu.
-     *
-     * @param inputConsole the input console
-     */
-    public Menu(InputConsole inputConsole) {
-        this.inputConsole = inputConsole;
-    }
-
     /**
      * Greeting menu.
      */
@@ -76,43 +64,4 @@ public class Menu {
         System.out.println("0 - Main menu");
     }
 
-    /**
-     * Exit menu.
-     */
-    public void exitMenu() {
-        System.out.println("0 - exit menu");
-        inputConsole.readingNumber();
-    }
-
-    /**
-     * Exit main menu.
-     */
-    public void exitMainMenu() {
-        System.out.println("0 - Main menu");
-        inputConsole.readingNumber();
-    }
-
-    /**
-     * Exit add value menu.
-     */
-    public void exitAddValueMenu() {
-        System.out.println("0 - Add value menu");
-        inputConsole.readingNumber();
-    }
-
-    /**
-     * No such point.
-     */
-    public void noSuchPoint() {
-        System.out.println("No such point");
-        exitMenu();
-    }
-
-    /**
-     * Incorrect username or password.
-     */
-    public void incorrectUsernameOrPassword() {
-        System.out.println("Incorrect username or password");
-        exitMenu();
-    }
 }

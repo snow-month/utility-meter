@@ -1,5 +1,6 @@
 package ru.homelab;
 
+import ru.homelab.in.ExitMenu;
 import ru.homelab.in.InputConsole;
 import ru.homelab.model.*;
 import ru.homelab.out.Menu;
@@ -25,7 +26,7 @@ public class Main {
      */
     public static void main(String[] args) {
         InputConsole inputConsole = new InputConsole();
-        Menu menu = new Menu(inputConsole);
+        ExitMenu exitMenu = new ExitMenu(inputConsole);
         ShowValueMeters showValueMeters = new ShowValueMeters();
         Authorization authorization = new Authorization();
         CreateNewUser createNewUser = new CreateNewUser();
@@ -39,35 +40,36 @@ public class Main {
                 case 0:
                     break;
                 case 1:
-                    authorization(authorization, inputConsole, menu, showValueMeters);
+                    authorization(authorization, inputConsole, showValueMeters, exitMenu);
                     break;
                 case 2:
-                    createNewUser(createNewUser, menu, inputConsole);
+                    createNewUser(createNewUser, inputConsole, exitMenu);
                     break;
                 default:
-                    menu.noSuchPoint();
+                    exitMenu.noSuchPoint();
             }
         } while (point != 0);
     }
 
     private static void authorization(Authorization authorization, InputConsole inputConsole,
-                                      Menu menu, ShowValueMeters showValueMeters) {
+                                      ShowValueMeters showValueMeters,
+                                      ExitMenu exitMenu) {
         String login = inputConsole.readingStr("login:");
         String password = inputConsole.readingStr("password:");
         boolean auth = authorization.authorization(login, password);
         if (auth) {
             if (authorization.currentUser().role().equals(Role.USER)) {
-                userMenu(authorization, inputConsole, menu, showValueMeters);
+                userMenu(authorization, inputConsole, showValueMeters, exitMenu);
             } else {
-                adminMenu(authorization, inputConsole, menu, showValueMeters);
+                adminMenu(authorization, inputConsole, showValueMeters, exitMenu);
             }
         } else {
-            menu.incorrectUsernameOrPassword();
+            exitMenu.incorrectUsernameOrPassword();
         }
     }
 
     private static void userMenu(Authorization authorization, InputConsole inputConsole,
-                                 Menu menu, ShowValueMeters showValueMeters) {
+                                 ShowValueMeters showValueMeters, ExitMenu exitMenu) {
         int point;
         do {
             Menu.mainMenuUser(authorization.currentUser());
@@ -83,10 +85,10 @@ public class Main {
                     showValueMeters.currentValuesMeters(login, Table.HEATING, NameMeter.HEATING);
                     showValueMeters.currentValuesMeters(login, Table.WATER_COLD, NameMeter.WATER_COLD);
                     showValueMeters.currentValuesMeters(login, Table.WATER_HOT, NameMeter.WATER_HOT);
-                    menu.exitMainMenu();
+                    exitMenu.exitMainMenu();
                     break;
                 case 2:
-                    addValueMenu(login, inputConsole, menu);
+                    addValueMenu(login, inputConsole, exitMenu);
                     break;
                 case 3:
                     Logger.log(login, Audit.VIEWING_READINGS_FOR_THE_MONTH);
@@ -94,23 +96,24 @@ public class Main {
                     showValueMeters.valueForMonth(login, month, Table.HEATING, NameMeter.HEATING);
                     showValueMeters.valueForMonth(login, month, Table.WATER_COLD, NameMeter.WATER_COLD);
                     showValueMeters.valueForMonth(login, month, Table.WATER_HOT, NameMeter.WATER_HOT);
-                    menu.exitMainMenu();
+                    exitMenu.exitMainMenu();
                     break;
                 case 4:
                     Logger.log(login, Audit.GETTING_HISTORY_OF_GIVING_TESTIMONY);
                     showValueMeters.allValues(login, Table.HEATING, NameMeter.HEATING);
                     showValueMeters.allValues(login, Table.WATER_COLD, NameMeter.WATER_COLD);
                     showValueMeters.allValues(login, Table.WATER_HOT, NameMeter.WATER_HOT);
-                    menu.exitMainMenu();
+                    exitMenu.exitMainMenu();
                     break;
                 default:
-                    menu.noSuchPoint();
+                    exitMenu.noSuchPoint();
             }
         } while (point != 0);
     }
 
     private static void adminMenu(Authorization authorization, InputConsole inputConsole,
-                                  Menu menu, ShowValueMeters showValueMeters) {
+                                  ShowValueMeters showValueMeters,
+                                  ExitMenu exitMenu) {
         int point;
         do {
             Menu.mainMenuAdmin(authorization.currentUser());
@@ -124,23 +127,25 @@ public class Main {
                     showValueMeters.allValues(login, Table.HEATING, NameMeter.HEATING);
                     showValueMeters.allValues(login, Table.WATER_COLD, NameMeter.WATER_COLD);
                     showValueMeters.allValues(login, Table.WATER_HOT, NameMeter.WATER_HOT);
-                    menu.exitMainMenu();
+                    exitMenu.exitMainMenu();
                     break;
                 default:
             }
         } while (point != 0);
     }
 
-    private static void createNewUser(CreateNewUser createNewUser, Menu menu, InputConsole inputConsole) {
+    private static void createNewUser(CreateNewUser createNewUser,
+                                      InputConsole inputConsole, ExitMenu exitMenu) {
         String login = inputConsole.readingStr("Creating a new user. Enter login:");
         String password = inputConsole.readingNewPassword();
         User user = createNewUser.createNewUser(login, password);
         Logger.log(user.login(), Audit.CREATE_NEW_USER);
         System.out.println("success");
-        menu.exitMenu();
+        exitMenu.exitMenu();
     }
 
-    private static void addValueMenu(String login, InputConsole inputConsole, Menu menu) {
+    private static void addValueMenu(String login, InputConsole inputConsole,
+                                     ExitMenu exitMenu) {
         int point;
         do {
             Menu.addValueMenu(login);
@@ -151,20 +156,20 @@ public class Main {
                 case 1:
                     Logger.log(login, Audit.GIVING_EVIDENCE);
                     inputConsole.addValue(login, Table.HEATING, NameMeter.HEATING);
-                    menu.exitAddValueMenu();
+                    exitMenu.exitAddValueMenu();
                     break;
                 case 2:
                     Logger.log(login, Audit.GIVING_EVIDENCE);
                     inputConsole.addValue(login, Table.WATER_COLD, NameMeter.WATER_COLD);
-                    menu.exitAddValueMenu();
+                    exitMenu.exitAddValueMenu();
                     break;
                 case 3:
                     Logger.log(login, Audit.GIVING_EVIDENCE);
                     inputConsole.addValue(login, Table.WATER_HOT, NameMeter.WATER_HOT);
-                    menu.exitAddValueMenu();
+                    exitMenu.exitAddValueMenu();
                     break;
                 default:
-                    menu.noSuchPoint();
+                    exitMenu.noSuchPoint();
             }
         } while (point != 0);
     }
