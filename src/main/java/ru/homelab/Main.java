@@ -26,7 +26,7 @@ public class Main {
     public static void main(String[] args) {
         InputConsole inputConsole = new InputConsole();
         Menu menu = new Menu(inputConsole);
-        ShowValueMeters showValueMeters = new ShowValueMeters(inputConsole, menu);
+        ShowValueMeters showValueMeters = new ShowValueMeters(inputConsole);
         Authorization authorization = new Authorization();
         CreateNewUser createNewUser = new CreateNewUser();
         init();
@@ -152,14 +152,17 @@ public class Main {
                 case 1:
                     Logger.log(login, Audit.GIVING_EVIDENCE);
                     showValueMeters.addValue(login, Table.HEATING, NameMeter.HEATING);
+                    menu.exitAddValueMenu();
                     break;
                 case 2:
                     Logger.log(login, Audit.GIVING_EVIDENCE);
                     showValueMeters.addValue(login, Table.WATER_COLD, NameMeter.WATER_COLD);
+                    menu.exitAddValueMenu();
                     break;
                 case 3:
                     Logger.log(login, Audit.GIVING_EVIDENCE);
                     showValueMeters.addValue(login, Table.WATER_HOT, NameMeter.WATER_HOT);
+                    menu.exitAddValueMenu();
                     break;
                 default:
                     menu.noSuchPoint();

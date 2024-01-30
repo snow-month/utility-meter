@@ -12,17 +12,14 @@ import java.util.Map;
  */
 public class ShowValueMeters {
     private final InputConsole inputConsole;
-    private final Menu menu;
 
     /**
      * Instantiates a new Show value meters.
      *
      * @param inputConsole the input console
-     * @param menu         the menu
      */
-    public ShowValueMeters(InputConsole inputConsole, Menu menu) {
+    public ShowValueMeters(InputConsole inputConsole) {
         this.inputConsole = inputConsole;
-        this.menu = menu;
     }
 
     /**
@@ -56,7 +53,6 @@ public class ShowValueMeters {
         } else {
             System.out.println("Readings can be added once a month");
         }
-        menu.exitAddValueMenu();
     }
 
     /**
