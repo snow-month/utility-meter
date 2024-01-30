@@ -9,7 +9,7 @@ public class Menu {
     /**
      * Greeting menu.
      */
-    public static void greetingMenu() {
+    public void greetingMenu() {
         System.out.println("Greeting menu:");
         System.out.println("Default:");
         System.out.println("login: user, password: user, role: USER");
@@ -25,7 +25,7 @@ public class Menu {
      *
      * @param user the user
      */
-    public static void mainMenuUser(User user) {
+    public void mainMenuUser(User user) {
         System.out.println("user: " + user.login());
         System.out.println("Main menu:");
         System.out.println("Select an item and click enter:");
@@ -41,7 +41,7 @@ public class Menu {
      *
      * @param user the user
      */
-    public static void mainMenuAdmin(User user) {
+    public void mainMenuAdmin(User user) {
         System.out.println("user: " + user.login() + ", role: ADMIN");
         System.out.println("Main menu:");
         System.out.println("Select an item and click enter:");
@@ -54,7 +54,7 @@ public class Menu {
      *
      * @param login the login
      */
-    public static void addValueMenu(String login) {
+    public void addValueMenu(String login) {
         System.out.println("user: " + login);
         System.out.println("Add value menu:");
         System.out.println("Select an item and click enter:");
@@ -63,5 +63,4 @@ public class Menu {
         System.out.println("3 - To add hot water indicators");
         System.out.println("0 - Main menu");
     }
-
 }
