@@ -75,10 +75,11 @@ public class Main {
             String login = authorization.currentUser().login();
             switch (point) {
                 case 0:
+                    authorization.logout();
                     break;
                 case 1:
                     Logger.log(login, Audit.VIEW_CURRENT_READINGS);
-                    System.out.println("Текущие показания счётчиков:");
+                    System.out.println("Current meter readings:");
                     showValueMeters.currentValuesMeters(login, Table.HEATING, NameMeter.HEATING);
                     showValueMeters.currentValuesMeters(login, Table.WATER_COLD, NameMeter.WATER_COLD);
                     showValueMeters.currentValuesMeters(login, Table.WATER_HOT, NameMeter.WATER_HOT);
@@ -116,6 +117,7 @@ public class Main {
             point = inputConsole.readingNumber();
             switch (point) {
                 case 0:
+                    authorization.logout();
                     break;
                 case 1:
                     String login = inputConsole.enterUser();
