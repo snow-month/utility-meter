@@ -1,6 +1,5 @@
 package ru.homelab.security;
 
-import ru.homelab.in.InputConsole;
 import ru.homelab.model.Table;
 import ru.homelab.model.User;
 
@@ -9,16 +8,6 @@ import ru.homelab.model.User;
  */
 public class Authorization {
     private User user;
-    private final InputConsole inputConsole;
-
-    /**
-     * Instantiates a new Authorization.
-     *
-     * @param inputConsole the input console
-     */
-    public Authorization(InputConsole inputConsole) {
-        this.inputConsole = inputConsole;
-    }
 
     /**
      * Current user user.
@@ -34,12 +23,7 @@ public class Authorization {
      *
      * @return the boolean
      */
-    public boolean authorization() {
-        System.out.println("login:");
-        String login = inputConsole.readingStr();
-        System.out.println("password:");
-        String password = inputConsole.readingStr();
-
+    public boolean authorization(String login, String password) {
         User userTable;
         if (Table.USERS.containsKey(login)) {
             userTable = Table.USERS.get(login);

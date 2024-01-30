@@ -73,4 +73,24 @@ public class InputConsole {
         Scanner scanner = new Scanner(System.in);
         return scanner.next();
     }
+
+    public String readingStr(String message) {
+        System.out.println(message);
+        Scanner scanner = new Scanner(System.in);
+        return scanner.next();
+    }
+
+    public String readingNewPassword() {
+        String password;
+        String confirmation;
+        do {
+            password = readingStr("Enter password");
+            confirmation = readingStr("Confirm the password");
+            if (!password.equals(confirmation)) {
+                System.out.println("Passwords don't match");
+            }
+        } while (!password.equals(confirmation));
+
+        return password;
+    }
 }

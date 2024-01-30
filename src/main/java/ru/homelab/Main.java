@@ -27,8 +27,8 @@ public class Main {
         InputConsole inputConsole = new InputConsole();
         Menu menu = new Menu(inputConsole);
         ShowValueMeters showValueMeters = new ShowValueMeters(inputConsole, menu);
-        Authorization authorization = new Authorization(inputConsole);
-        CreateNewUser createNewUser = new CreateNewUser(inputConsole);
+        Authorization authorization = new Authorization();
+        CreateNewUser createNewUser = new CreateNewUser();
         init();
 
         int point;
@@ -42,7 +42,7 @@ public class Main {
                     authorization(authorization, inputConsole, menu, showValueMeters);
                     break;
                 case 2:
-                    createNewUser(createNewUser, menu);
+                    createNewUser(createNewUser, menu, inputConsole);
                     break;
                 default:
                     menu.noSuchPoint();
@@ -52,7 +52,9 @@ public class Main {
 
     private static void authorization(Authorization authorization, InputConsole inputConsole,
                                       Menu menu, ShowValueMeters showValueMeters) {
-        boolean auth = authorization.authorization();
+        String login = inputConsole.readingStr("login:");
+        String password = inputConsole.readingStr("password:");
+        boolean auth = authorization.authorization(login, password);
         if (auth) {
             if (authorization.currentUser().role().equals(Role.USER)) {
                 userMenu(authorization, inputConsole, menu, showValueMeters);
@@ -127,8 +129,10 @@ public class Main {
         } while (point != 0);
     }
 
-    private static void createNewUser(CreateNewUser createNewUser, Menu menu) {
-        User user = createNewUser.createNewUser();
+    private static void createNewUser(CreateNewUser createNewUser, Menu menu, InputConsole inputConsole) {
+        String login = inputConsole.readingStr("Creating a new user. Enter login:");
+        String password = inputConsole.readingNewPassword();
+        User user = createNewUser.createNewUser(login, password);
         Logger.log(user.login(), Audit.CREATE_NEW_USER);
         System.out.println("success");
         menu.exitMenu();
