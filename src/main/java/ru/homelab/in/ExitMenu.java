@@ -1,18 +1,12 @@
 package ru.homelab.in;
 
-public class ExitMenu {
-    private final InputConsole inputConsole;
-
-    public ExitMenu(InputConsole inputConsole) {
-        this.inputConsole = inputConsole;
-    }
-
+public class ExitMenu extends InputUtility {
     /**
      * Exit menu.
      */
     public void exitMenu() {
         System.out.println("0 - exit menu");
-        inputConsole.readingNumber();
+        readingNumber();
     }
 
     /**
@@ -20,7 +14,7 @@ public class ExitMenu {
      */
     public void exitMainMenu() {
         System.out.println("0 - Main menu");
-        inputConsole.readingNumber();
+        readingNumber();
     }
 
     /**
@@ -28,7 +22,7 @@ public class ExitMenu {
      */
     public void exitAddValueMenu() {
         System.out.println("0 - AddValueMenu");
-        inputConsole.readingNumber();
+        readingNumber();
     }
 
     /**

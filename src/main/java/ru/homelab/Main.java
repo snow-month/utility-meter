@@ -26,7 +26,7 @@ public class Main {
      */
     public static void main(String[] args) {
         InputConsole inputConsole = new InputConsole();
-        ExitMenu exitMenu = new ExitMenu(inputConsole);
+        ExitMenu exitMenu = new ExitMenu();
         ShowValueMeters showValueMeters = new ShowValueMeters();
         Authorization authorization = new Authorization();
         CreateNewUser createNewUser = new CreateNewUser();

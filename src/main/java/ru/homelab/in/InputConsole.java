@@ -6,13 +6,12 @@ import ru.homelab.model.Role;
 import ru.homelab.model.Table;
 
 import java.util.Map;
-import java.util.Scanner;
 
 
 /**
  * The type Input console.
  */
-public class InputConsole {
+public class InputConsole extends InputUtility {
     /**
      * Enter the month number int.
      *
@@ -44,43 +43,6 @@ public class InputConsole {
             }
         } while (!Table.USERS.containsKey(login));
         return login;
-    }
-
-    /**
-     * Reading number int.
-     *
-     * @return the int
-     */
-    public int readingNumber() {
-        Scanner scanner = new Scanner(System.in);
-        int point;
-
-        while (true) {
-            if (scanner.hasNextInt()) {
-                point = scanner.nextInt();
-                break;
-            } else {
-                System.out.println("enter a number");
-                scanner.next();
-            }
-        }
-        return point;
-    }
-
-    /**
-     * Reading str string.
-     *
-     * @return the string
-     */
-    public String readingStr() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.next();
-    }
-
-    public String readingStr(String message) {
-        System.out.println(message);
-        Scanner scanner = new Scanner(System.in);
-        return scanner.next();
     }
 
     public String readingNewPassword() {
