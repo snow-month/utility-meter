@@ -30,7 +30,7 @@ public class Main {
         Core core = new Core(menu, inputConsole, exitMenu, showValueMeters, authorization,
                 createNewUser);
 
-        core.star();
+        core.start();
     }
 
     private static void init() {

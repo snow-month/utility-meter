@@ -32,7 +32,7 @@ public class Core {
         this.createNewUser = createNewUser;
     }
 
-    public void star() {
+    public void start() {
         int point;
         do {
             menu.greetingMenu();
