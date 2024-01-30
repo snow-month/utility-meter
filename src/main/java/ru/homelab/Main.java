@@ -26,7 +26,7 @@ public class Main {
     public static void main(String[] args) {
         InputConsole inputConsole = new InputConsole();
         Menu menu = new Menu(inputConsole);
-        ShowValueMeters showValueMeters = new ShowValueMeters(inputConsole);
+        ShowValueMeters showValueMeters = new ShowValueMeters();
         Authorization authorization = new Authorization();
         CreateNewUser createNewUser = new CreateNewUser();
         init();
@@ -86,7 +86,7 @@ public class Main {
                     menu.exitMainMenu();
                     break;
                 case 2:
-                    addValueMenu(login, inputConsole, menu, showValueMeters);
+                    addValueMenu(login, inputConsole, menu);
                     break;
                 case 3:
                     Logger.log(login, Audit.VIEWING_READINGS_FOR_THE_MONTH);
@@ -140,8 +140,7 @@ public class Main {
         menu.exitMenu();
     }
 
-    private static void addValueMenu(String login, InputConsole inputConsole,
-                                     Menu menu, ShowValueMeters showValueMeters) {
+    private static void addValueMenu(String login, InputConsole inputConsole, Menu menu) {
         int point;
         do {
             Menu.addValueMenu(login);
@@ -151,17 +150,17 @@ public class Main {
                     break;
                 case 1:
                     Logger.log(login, Audit.GIVING_EVIDENCE);
-                    showValueMeters.addValue(login, Table.HEATING, NameMeter.HEATING);
+                    inputConsole.addValue(login, Table.HEATING, NameMeter.HEATING);
                     menu.exitAddValueMenu();
                     break;
                 case 2:
                     Logger.log(login, Audit.GIVING_EVIDENCE);
-                    showValueMeters.addValue(login, Table.WATER_COLD, NameMeter.WATER_COLD);
+                    inputConsole.addValue(login, Table.WATER_COLD, NameMeter.WATER_COLD);
                     menu.exitAddValueMenu();
                     break;
                 case 3:
                     Logger.log(login, Audit.GIVING_EVIDENCE);
-                    showValueMeters.addValue(login, Table.WATER_HOT, NameMeter.WATER_HOT);
+                    inputConsole.addValue(login, Table.WATER_HOT, NameMeter.WATER_HOT);
                     menu.exitAddValueMenu();
                     break;
                 default:

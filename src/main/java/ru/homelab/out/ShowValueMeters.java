@@ -1,6 +1,5 @@
 package ru.homelab.out;
 
-import ru.homelab.in.InputConsole;
 import ru.homelab.model.Meter;
 import ru.homelab.model.NameMeter;
 
@@ -11,17 +10,6 @@ import java.util.Map;
  * The type Show value meters.
  */
 public class ShowValueMeters {
-    private final InputConsole inputConsole;
-
-    /**
-     * Instantiates a new Show value meters.
-     *
-     * @param inputConsole the input console
-     */
-    public ShowValueMeters(InputConsole inputConsole) {
-        this.inputConsole = inputConsole;
-    }
-
     /**
      * Current values meters.
      *
@@ -35,23 +23,6 @@ public class ShowValueMeters {
             System.out.println(meter.name() + ": There is no indication");
         } else {
             System.out.println(meter.name() + ": " + value);
-        }
-    }
-
-    /**
-     * Add value.
-     *
-     * @param login the login
-     * @param map   the map
-     * @param meter the meter
-     */
-    public void addValue(String login, Map<String, Meter> map, NameMeter meter) {
-        System.out.println("Enter the meter reading " + meter.name() + ":");
-        boolean addValue = map.get(login).addValue(inputConsole.readingNumber());
-        if (addValue) {
-            System.out.println("Readings added");
-        } else {
-            System.out.println("Readings can be added once a month");
         }
     }
 
