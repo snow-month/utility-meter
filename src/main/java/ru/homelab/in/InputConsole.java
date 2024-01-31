@@ -1,11 +1,7 @@
 package ru.homelab.in;
 
-import ru.homelab.model.Meter;
-import ru.homelab.model.NameMeter;
 import ru.homelab.model.Role;
 import ru.homelab.model.Table;
-
-import java.util.Map;
 
 
 /**
@@ -57,15 +53,5 @@ public class InputConsole extends InputUtility {
         } while (!password.equals(confirmation));
 
         return password;
-    }
-
-    public void addValue(String login, Map<String, Meter> map, NameMeter meter) {
-        System.out.println("Enter the meter reading " + meter.name() + ":");
-        boolean addValue = map.get(login).addValue(readingNumber());
-        if (addValue) {
-            System.out.println("Readings added");
-        } else {
-            System.out.println("Readings can be added once a month");
-        }
     }
 }

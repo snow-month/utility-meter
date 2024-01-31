@@ -1,14 +1,15 @@
 package ru.homelab;
 
+import ru.homelab.controller.ControllerMeters;
 import ru.homelab.in.ExitMenu;
 import ru.homelab.in.InputConsole;
+import ru.homelab.in.InputUtility;
 import ru.homelab.logicprogram.Core;
 import ru.homelab.model.MeterImpl;
 import ru.homelab.model.Role;
 import ru.homelab.model.Table;
 import ru.homelab.model.User;
 import ru.homelab.out.Menu;
-import ru.homelab.out.ShowValueMeters;
 import ru.homelab.security.Authorization;
 import ru.homelab.security.CreateNewUser;
 
@@ -21,9 +22,10 @@ public class Main {
         init();
 
         Menu menu = new Menu();
+        InputUtility inputUtility = new InputUtility();
         InputConsole inputConsole = new InputConsole();
         ExitMenu exitMenu = new ExitMenu();
-        ShowValueMeters showValueMeters = new ShowValueMeters();
+        ControllerMeters showValueMeters = new ControllerMeters(inputUtility);
         Authorization authorization = new Authorization();
         CreateNewUser createNewUser = new CreateNewUser();
 

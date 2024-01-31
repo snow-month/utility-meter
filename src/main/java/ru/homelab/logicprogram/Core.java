@@ -1,5 +1,6 @@
 package ru.homelab.logicprogram;
 
+import ru.homelab.controller.ControllerMeters;
 import ru.homelab.in.ExitMenu;
 import ru.homelab.in.InputConsole;
 import ru.homelab.model.NameMeter;
@@ -7,7 +8,6 @@ import ru.homelab.model.Role;
 import ru.homelab.model.Table;
 import ru.homelab.model.User;
 import ru.homelab.out.Menu;
-import ru.homelab.out.ShowValueMeters;
 import ru.homelab.security.Authorization;
 import ru.homelab.security.CreateNewUser;
 import ru.homelab.utils.log.Audit;
@@ -17,12 +17,12 @@ public class Core {
     private final Menu menu;
     private final InputConsole inputConsole;
     private final ExitMenu exitMenu;
-    private final ShowValueMeters showValueMeters;
+    private final ControllerMeters showValueMeters;
     private final Authorization authorization;
     private final CreateNewUser createNewUser;
 
-    public Core(Menu menu, InputConsole inputConsole, ExitMenu exitMenu,
-                ShowValueMeters showValueMeters, Authorization authorization,
+    public Core(Menu menu, InputConsole inputConsole,
+                ExitMenu exitMenu, ControllerMeters showValueMeters, Authorization authorization,
                 CreateNewUser createNewUser) {
         this.menu = menu;
         this.inputConsole = inputConsole;
@@ -149,17 +149,17 @@ public class Core {
                     break;
                 case 1:
                     Logger.log(login, Audit.GIVING_EVIDENCE);
-                    inputConsole.addValue(login, Table.HEATING, NameMeter.HEATING);
+                    showValueMeters.addValue(login, Table.HEATING, NameMeter.HEATING);
                     exitMenu.exitAddValueMenu();
                     break;
                 case 2:
                     Logger.log(login, Audit.GIVING_EVIDENCE);
-                    inputConsole.addValue(login, Table.WATER_COLD, NameMeter.WATER_COLD);
+                    showValueMeters.addValue(login, Table.WATER_COLD, NameMeter.WATER_COLD);
                     exitMenu.exitAddValueMenu();
                     break;
                 case 3:
                     Logger.log(login, Audit.GIVING_EVIDENCE);
-                    inputConsole.addValue(login, Table.WATER_HOT, NameMeter.WATER_HOT);
+                    showValueMeters.addValue(login, Table.WATER_HOT, NameMeter.WATER_HOT);
                     exitMenu.exitAddValueMenu();
                     break;
                 default:
