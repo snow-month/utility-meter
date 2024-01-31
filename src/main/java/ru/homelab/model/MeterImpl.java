@@ -35,7 +35,7 @@ public class MeterImpl implements Meter {
 
     @Override
     public boolean addValue(int value) {
-        if (checkingValueCurrentMonth()) {
+        if (!checkingValueCurrentMonth()) {
             int year = currentYear();
             int month = currentMonth();
             if (!meter.containsKey(year)) {
@@ -54,6 +54,7 @@ public class MeterImpl implements Meter {
         if (meter.containsKey(year) && currentMonth() >= month) {
             return meter.get(year).get(month);
         }
+        // Если месяц не подходит выбросить Exception("некоректный месяц нет показаний")
         return 0;
     }
 
@@ -77,11 +78,12 @@ public class MeterImpl implements Meter {
     private boolean checkingValueCurrentMonth() {
         int year = currentYear();
         if (!meter.containsKey(year)) {
-            return true;
+            return false;
         }
-        int month = currentMonth();
-        int countValuesOfYear = meter.get(year).size();
 
-        return countValuesOfYear == month;
+        int month = currentMonth();
+
+        int value = meter.get(year).get(month);
+        return value != 0;
     }
 }
