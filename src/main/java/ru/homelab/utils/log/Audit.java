@@ -1,7 +1,10 @@
 package ru.homelab.utils.log;
 
 /**
- * Действия пользователя
+ * Enum действия пользователя.
+ *
+ * @author Petr "mypost@home.ru"
+ * @version 1.0
  */
 public enum Audit {
     /**

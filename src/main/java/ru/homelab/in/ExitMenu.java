@@ -1,8 +1,14 @@
 package ru.homelab.in;
 
+/**
+ * Класс для отображения меню для выхода.
+ *
+ * @author Petr "mypost@home.ru"
+ * @version 1.0
+ */
 public class ExitMenu extends InputUtility {
     /**
-     * Exit menu.
+     * Выход из меню.
      */
     public void exitMenu() {
         System.out.println("0 - exit menu");
@@ -10,7 +16,7 @@ public class ExitMenu extends InputUtility {
     }
 
     /**
-     * Exit main menu.
+     * Выход в главное меню.
      */
     public void exitMainMenu() {
         System.out.println("0 - Main menu");
@@ -18,7 +24,7 @@ public class ExitMenu extends InputUtility {
     }
 
     /**
-     * Exit add value menu.
+     * Выход в меню добавления показаний.
      */
     public void exitAddValueMenu() {
         System.out.println("0 - AddValueMenu");
@@ -26,7 +32,7 @@ public class ExitMenu extends InputUtility {
     }
 
     /**
-     * No such point.
+     * Меню если была выбрана некорректная цифра.
      */
     public void noSuchPoint() {
         System.out.println("No such point");
@@ -34,7 +40,7 @@ public class ExitMenu extends InputUtility {
     }
 
     /**
-     * Incorrect username or password.
+     * Меню если был введён неправильный login и password.
      */
     public void incorrectUsernameOrPassword() {
         System.out.println("Incorrect username or password");

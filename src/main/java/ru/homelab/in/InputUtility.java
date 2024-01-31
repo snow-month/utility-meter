@@ -2,9 +2,16 @@ package ru.homelab.in;
 
 import java.util.Scanner;
 
+/**
+ * Класс для утилит чтения с консоли.
+ *
+ * @author Petr "mypost@home.ru"
+ * @version 1.0
+ */
 public class InputUtility {
     /**
-     * Reading number int.
+     * Метод для считывания числа,
+     * при некорректных данных - данные будут повторно считаны с консоли.
      *
      * @return the int
      */
@@ -25,7 +32,7 @@ public class InputUtility {
     }
 
     /**
-     * Reading str string.
+     * Метод для считывания строки.
      *
      * @return the string
      */
@@ -34,6 +41,12 @@ public class InputUtility {
         return scanner.next();
     }
 
+    /**
+     * Метод для считывания строки.
+     *
+     * @param message сообщение которое, отобразиться перед вводом
+     * @return the string
+     */
     public String readingStr(String message) {
         System.out.println(message);
         Scanner scanner = new Scanner(System.in);

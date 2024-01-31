@@ -4,34 +4,38 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The interface Meter.
+ * Интерфейс для работы с ресурсами.
+ *
+ * @author Petr "mypost@home.ru"
+ * @version 1.0
  */
 public interface Meter {
     /**
-     * Current value integer.
+     * Метод возвращает текущее значение.
      *
      * @return the integer
      */
     Integer currentValue();
 
     /**
-     * Add value boolean.
+     * Метод для добавления значения.
      *
-     * @param value the value
+     * @param value добавляемое значение
      * @return the boolean
      */
     boolean addValue(int value);
 
     /**
-     * Value for month integer.
+     * Метод возвращает значение по номеру месяца.
      *
-     * @param month the month
+     * @param month номер месяца
      * @return the integer
+     * @throws Exception the exception
      */
     Integer valueForMonth(int month) throws Exception;
 
     /**
-     * All values map.
+     * Метод возвращает все значения.
      *
      * @return the map
      */

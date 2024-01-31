@@ -6,11 +6,14 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * The type Logger.
+ * Класс для логирования действия пользователя.
+ *
+ * @author Petr "mypost@home.ru"
+ * @version 1.0
  */
 public class Logger {
     /**
-     * Log.
+     * Метод для логирования.
      *
      * @param login the login
      * @param audit the audit

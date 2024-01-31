@@ -7,13 +7,31 @@ import ru.homelab.model.NameMeter;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Класс для работы с ресурсами.
+ *
+ * @author Petr "mypost@home.ru"
+ * @version 1.0
+ */
 public class ControllerMeters {
     private final InputUtility inputUtility;
 
+    /**
+     * Instantiates a new Controller meters.
+     *
+     * @param inputUtility the input utility
+     */
     public ControllerMeters(InputUtility inputUtility) {
         this.inputUtility = inputUtility;
     }
 
+    /**
+     * Метод отображает текущее значение счётчика.
+     *
+     * @param login the login
+     * @param map   HashMap, где key - login, value - данные счётчика
+     * @param meter название счётчика
+     */
     public void currentValuesMeters(String login, Map<String, Meter> map, NameMeter meter) {
         Integer value = map.get(login).currentValue();
         if (value == null) {
@@ -23,6 +41,13 @@ public class ControllerMeters {
         }
     }
 
+    /**
+     * Добавление значения счётчика.
+     *
+     * @param login the login
+     * @param map   HashMap, где key - login, value - данные счётчика
+     * @param meter название счётчика
+     */
     public void addValue(String login, Map<String, Meter> map, NameMeter meter) {
         System.out.println("Enter the meter reading " + meter.name() + ":");
         boolean addValue = map.get(login).addValue(inputUtility.readingNumber());
@@ -33,6 +58,14 @@ public class ControllerMeters {
         }
     }
 
+    /**
+     * Получение значения счётчика за конкретный месяц.
+     *
+     * @param login the login
+     * @param month месяц за который нужно получить показания
+     * @param map   HashMap, где key - login, value - данные счётчика
+     * @param meter название счётчика
+     */
     public void valueForMonth(String login, int month, Map<String, Meter> map,
                               NameMeter meter) {
         try {
@@ -43,6 +76,13 @@ public class ControllerMeters {
         }
     }
 
+    /**
+     * Получение всех значений.
+     *
+     * @param login the login
+     * @param map   HashMap, где key - login, value - данные счётчика
+     * @param meter название счётчика
+     */
     public void allValues(String login, Map<String, Meter> map, NameMeter meter) {
         System.out.println("The history of giving evidence " + meter.name() + ":");
         Map<Integer, List<Integer>> allValuesHeating = map.get(login).allValues();

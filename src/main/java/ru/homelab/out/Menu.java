@@ -3,11 +3,14 @@ package ru.homelab.out;
 import ru.homelab.model.User;
 
 /**
- * The type Menu.
+ * Класс для всех меню.
+ *
+ * @author Petr "mypost@home.ru"
+ * @version 1.0
  */
 public class Menu {
     /**
-     * Greeting menu.
+     * Стартовое меню.
      */
     public void greetingMenu() {
         System.out.println("Greeting menu:");
@@ -21,7 +24,7 @@ public class Menu {
     }
 
     /**
-     * Main menu user.
+     * Главное меню пользователя с ролью USER.
      *
      * @param user the user
      */
@@ -37,7 +40,7 @@ public class Menu {
     }
 
     /**
-     * Main menu admin.
+     * Главное меню пользователя с ролью ADMIN.
      *
      * @param user the user
      */
@@ -50,7 +53,7 @@ public class Menu {
     }
 
     /**
-     * Add value menu.
+     * Меню для ввода показаний счётчика.
      *
      * @param login the login
      */

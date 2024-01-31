@@ -1,7 +1,10 @@
 package ru.homelab.model;
 
 /**
- * The enum Name meter.
+ * Enum названий счётчиков.
+ *
+ * @author Petr "mypost@home.ru"
+ * @version 1.0
  */
 public enum NameMeter {
     /**

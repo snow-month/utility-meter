@@ -8,12 +8,17 @@ import ru.homelab.model.User;
 import java.util.ArrayList;
 
 /**
- * The type Create new user.
+ * Класс для создания нового пользователя.
+ *
+ * @author Petr "mypost@home.ru"
+ * @version 1.0
  */
 public class CreateNewUser {
     /**
-     * Create new user user.
+     * Метод для создания нового пользователя.
      *
+     * @param login    the login
+     * @param password the password
      * @return the user
      */
     public User createNewUser(String login, String password) {

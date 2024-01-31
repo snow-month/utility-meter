@@ -7,27 +7,30 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The type Table.
+ * Таблицы для хранения значений счётчиков.
+ *
+ * @author Petr "mypost@home.ru"
+ * @version 1.0
  */
 public class Table {
     /**
-     * The constant HEATING.
+     * Таблица для данных отопления.
      */
     public static final Map<String, Meter> HEATING = new HashMap<>();
     /**
-     * The constant WATER_HOT.
+     * Таблица для данных горячей воды.
      */
     public static final Map<String, Meter> WATER_HOT = new HashMap<>();
     /**
-     * The constant WATER_COLD.
+     * Таблица для данных холодной воды.
      */
     public static final Map<String, Meter> WATER_COLD = new HashMap<>();
     /**
-     * The constant LOGGER.
+     * Таблица для данных логирования.
      */
     public static final Map<String, List<Message>> LOGGER = new HashMap<>();
     /**
-     * таблица user
+     * Таблица для данных о пользователях.
      */
     public static final Map<String, User> USERS = new HashMap<>();
 }

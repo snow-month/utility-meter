@@ -13,6 +13,12 @@ import ru.homelab.security.CreateNewUser;
 import ru.homelab.utils.log.Audit;
 import ru.homelab.utils.log.Logger;
 
+/**
+ * Основной класс программы, где происходит считывание и отображение данных.
+ *
+ * @author Petr "mypost@home.ru"
+ * @version 1.0
+ */
 public class Core {
     private final Menu menu;
     private final InputConsole inputConsole;
@@ -21,17 +27,30 @@ public class Core {
     private final Authorization authorization;
     private final CreateNewUser createNewUser;
 
+    /**
+     * Instantiates a new Core.
+     *
+     * @param menu             меню для выбора пункта
+     * @param inputConsole     чтение данных из консоли
+     * @param exitMenu         меню выхода в верхнее меню
+     * @param controllerMeters контроллер для чтения и отображения данных
+     * @param authorization    авторизация
+     * @param createNewUser    создание нового пользователя
+     */
     public Core(Menu menu, InputConsole inputConsole,
-                ExitMenu exitMenu, ControllerMeters showValueMeters, Authorization authorization,
+                ExitMenu exitMenu, ControllerMeters controllerMeters, Authorization authorization,
                 CreateNewUser createNewUser) {
         this.menu = menu;
         this.inputConsole = inputConsole;
         this.exitMenu = exitMenu;
-        this.controllerMeters = showValueMeters;
+        this.controllerMeters = controllerMeters;
         this.authorization = authorization;
         this.createNewUser = createNewUser;
     }
 
+    /**
+     * Метод запускает стартовое меню.
+     */
     public void start() {
         int point;
         do {

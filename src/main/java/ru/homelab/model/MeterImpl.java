@@ -3,7 +3,10 @@ package ru.homelab.model;
 import java.util.*;
 
 /**
- * The type Meter.
+ * Класс реализующий интерфейс для работы с ресурсами.
+ *
+ * @author Petr "mypost@home.ru"
+ * @version 1.0
  */
 public class MeterImpl implements Meter {
     private final Map<Integer, List<Integer>> meter = new HashMap<>();
@@ -17,12 +20,11 @@ public class MeterImpl implements Meter {
     }
 
     /**
-     * Instantiates a new Meter.
+     * Конструктор, чтобы заполнить тестовыми данными для user.
      *
      * @param year   the year
      * @param values the values
      */
-// Чтобы заполнить тестовыми данными для user
     public MeterImpl(int year, List<Integer> values) {
         meter.put(year, values);
         currentValue = values.get(values.size() - 1);

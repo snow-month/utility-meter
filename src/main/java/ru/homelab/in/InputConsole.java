@@ -8,11 +8,14 @@ import java.util.Map;
 
 
 /**
- * The type Input console.
+ * Класс для считывания данных из консоли.
+ *
+ * @author Petr "mypost@home.ru"
+ * @version 1.0
  */
 public class InputConsole extends InputUtility {
     /**
-     * Enter the month number int.
+     * Метод для ввода номера месяца.
      *
      * @return the int
      */
@@ -22,7 +25,7 @@ public class InputConsole extends InputUtility {
     }
 
     /**
-     * Enter user string.
+     * Метод для ввода login.
      *
      * @return the string
      */
@@ -48,6 +51,11 @@ public class InputConsole extends InputUtility {
         return login;
     }
 
+    /**
+     * Метод для ввода нового пароля.
+     *
+     * @return the string
+     */
     public String readingNewPassword() {
         String password;
         String confirmation;

@@ -4,7 +4,10 @@ import ru.homelab.model.Table;
 import ru.homelab.model.User;
 
 /**
- * The type Authorization.
+ * Класс для авторизации.
+ *
+ * @author Petr "mypost@home.ru"
+ * @version 1.0
  */
 public class Authorization {
     private User user;
@@ -19,7 +22,7 @@ public class Authorization {
     }
 
     /**
-     * Authorization boolean.
+     * Метод для авторизации пользователя.
      *
      * @return the boolean
      */
@@ -39,7 +42,7 @@ public class Authorization {
     }
 
     /**
-     * Logout.
+     * Метод для logout.
      */
     public void logout() {
         user = null;

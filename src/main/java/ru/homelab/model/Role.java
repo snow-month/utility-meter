@@ -1,7 +1,10 @@
 package ru.homelab.model;
 
 /**
- * The enum Role.
+ * Enum для ролей безопасности.
+ *
+ * @author Petr "mypost@home.ru"
+ * @version 1.0
  */
 public enum Role {
     /**
