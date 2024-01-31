@@ -28,7 +28,7 @@ public interface Meter {
      * @param month the month
      * @return the integer
      */
-    Integer valueForMonth(int month);
+    Integer valueForMonth(int month) throws Exception;
 
     /**
      * All values map.

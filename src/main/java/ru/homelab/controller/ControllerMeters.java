@@ -35,9 +35,12 @@ public class ControllerMeters {
 
     public void valueForMonth(String login, int month, Map<String, Meter> map,
                               NameMeter meter) {
-        int value = map.get(login).valueForMonth(month - 1);
-        System.out.println("Monthly reading " + (month + 1) + " " + meter.name() + ": "
-                + value);
+        try {
+            int value = map.get(login).valueForMonth(month - 1);
+            System.out.println("Monthly reading " + month + " " + meter.name() + ": " + value);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void allValues(String login, Map<String, Meter> map, NameMeter meter) {

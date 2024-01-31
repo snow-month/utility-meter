@@ -49,13 +49,13 @@ public class MeterImpl implements Meter {
     }
 
     @Override
-    public Integer valueForMonth(int month) {
+    public Integer valueForMonth(int month) throws Exception {
         int year = currentYear();
         if (meter.containsKey(year) && currentMonth() >= month) {
             return meter.get(year).get(month);
         }
-        // Если месяц не подходит выбросить Exception("некоректный месяц нет показаний")
-        return 0;
+
+        throw new Exception((month + 1) + " month: no meter reading");
     }
 
     @Override
