@@ -17,7 +17,7 @@ public class Core {
     private final Menu menu;
     private final InputConsole inputConsole;
     private final ExitMenu exitMenu;
-    private final ControllerMeters showValueMeters;
+    private final ControllerMeters controllerMeters;
     private final Authorization authorization;
     private final CreateNewUser createNewUser;
 
@@ -27,7 +27,7 @@ public class Core {
         this.menu = menu;
         this.inputConsole = inputConsole;
         this.exitMenu = exitMenu;
-        this.showValueMeters = showValueMeters;
+        this.controllerMeters = showValueMeters;
         this.authorization = authorization;
         this.createNewUser = createNewUser;
     }
@@ -80,9 +80,9 @@ public class Core {
                 case 1:
                     Logger.log(login, Audit.VIEW_CURRENT_READINGS);
                     System.out.println("Current meter readings:");
-                    showValueMeters.currentValuesMeters(login, Table.HEATING, NameMeter.HEATING);
-                    showValueMeters.currentValuesMeters(login, Table.WATER_COLD, NameMeter.WATER_COLD);
-                    showValueMeters.currentValuesMeters(login, Table.WATER_HOT, NameMeter.WATER_HOT);
+                    controllerMeters.currentValuesMeters(login, Table.HEATING, NameMeter.HEATING);
+                    controllerMeters.currentValuesMeters(login, Table.WATER_COLD, NameMeter.WATER_COLD);
+                    controllerMeters.currentValuesMeters(login, Table.WATER_HOT, NameMeter.WATER_HOT);
                     exitMenu.exitMainMenu();
                     break;
                 case 2:
@@ -91,16 +91,16 @@ public class Core {
                 case 3:
                     Logger.log(login, Audit.VIEWING_READINGS_FOR_THE_MONTH);
                     int month = inputConsole.enterTheMonthNumber();
-                    showValueMeters.valueForMonth(login, month, Table.HEATING, NameMeter.HEATING);
-                    showValueMeters.valueForMonth(login, month, Table.WATER_COLD, NameMeter.WATER_COLD);
-                    showValueMeters.valueForMonth(login, month, Table.WATER_HOT, NameMeter.WATER_HOT);
+                    controllerMeters.valueForMonth(login, month, Table.HEATING, NameMeter.HEATING);
+                    controllerMeters.valueForMonth(login, month, Table.WATER_COLD, NameMeter.WATER_COLD);
+                    controllerMeters.valueForMonth(login, month, Table.WATER_HOT, NameMeter.WATER_HOT);
                     exitMenu.exitMainMenu();
                     break;
                 case 4:
                     Logger.log(login, Audit.GETTING_HISTORY_OF_GIVING_TESTIMONY);
-                    showValueMeters.allValues(login, Table.HEATING, NameMeter.HEATING);
-                    showValueMeters.allValues(login, Table.WATER_COLD, NameMeter.WATER_COLD);
-                    showValueMeters.allValues(login, Table.WATER_HOT, NameMeter.WATER_HOT);
+                    controllerMeters.allValues(login, Table.HEATING, NameMeter.HEATING);
+                    controllerMeters.allValues(login, Table.WATER_COLD, NameMeter.WATER_COLD);
+                    controllerMeters.allValues(login, Table.WATER_HOT, NameMeter.WATER_HOT);
                     exitMenu.exitMainMenu();
                     break;
                 default:
@@ -120,9 +120,9 @@ public class Core {
                     break;
                 case 1:
                     String login = inputConsole.enterUser();
-                    showValueMeters.allValues(login, Table.HEATING, NameMeter.HEATING);
-                    showValueMeters.allValues(login, Table.WATER_COLD, NameMeter.WATER_COLD);
-                    showValueMeters.allValues(login, Table.WATER_HOT, NameMeter.WATER_HOT);
+                    controllerMeters.allValues(login, Table.HEATING, NameMeter.HEATING);
+                    controllerMeters.allValues(login, Table.WATER_COLD, NameMeter.WATER_COLD);
+                    controllerMeters.allValues(login, Table.WATER_HOT, NameMeter.WATER_HOT);
                     exitMenu.exitMainMenu();
                     break;
                 default:
@@ -149,17 +149,17 @@ public class Core {
                     break;
                 case 1:
                     Logger.log(login, Audit.GIVING_EVIDENCE);
-                    showValueMeters.addValue(login, Table.HEATING, NameMeter.HEATING);
+                    controllerMeters.addValue(login, Table.HEATING, NameMeter.HEATING);
                     exitMenu.exitAddValueMenu();
                     break;
                 case 2:
                     Logger.log(login, Audit.GIVING_EVIDENCE);
-                    showValueMeters.addValue(login, Table.WATER_COLD, NameMeter.WATER_COLD);
+                    controllerMeters.addValue(login, Table.WATER_COLD, NameMeter.WATER_COLD);
                     exitMenu.exitAddValueMenu();
                     break;
                 case 3:
                     Logger.log(login, Audit.GIVING_EVIDENCE);
-                    showValueMeters.addValue(login, Table.WATER_HOT, NameMeter.WATER_HOT);
+                    controllerMeters.addValue(login, Table.WATER_HOT, NameMeter.WATER_HOT);
                     exitMenu.exitAddValueMenu();
                     break;
                 default:

@@ -25,11 +25,11 @@ public class Main {
         InputUtility inputUtility = new InputUtility();
         InputConsole inputConsole = new InputConsole();
         ExitMenu exitMenu = new ExitMenu();
-        ControllerMeters showValueMeters = new ControllerMeters(inputUtility);
+        ControllerMeters controllerMeters = new ControllerMeters(inputUtility);
         Authorization authorization = new Authorization();
         CreateNewUser createNewUser = new CreateNewUser();
 
-        Core core = new Core(menu, inputConsole, exitMenu, showValueMeters, authorization,
+        Core core = new Core(menu, inputConsole, exitMenu, controllerMeters, authorization,
                 createNewUser);
 
         core.start();
