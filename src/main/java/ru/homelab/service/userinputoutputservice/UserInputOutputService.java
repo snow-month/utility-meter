@@ -1,4 +1,4 @@
-package ru.homelab.logicprogram;
+package ru.homelab.service.userinputoutputservice;
 
 import ru.homelab.controller.ControllerMeters;
 import ru.homelab.in.ExitMenu;
@@ -19,7 +19,7 @@ import ru.homelab.utils.log.Logger;
  * @author Petr "mypost@home.ru"
  * @version 1.0
  */
-public class Core {
+public class UserInputOutputService {
     private final Menu menu;
     private final InputConsole inputConsole;
     private final ExitMenu exitMenu;
@@ -37,9 +37,9 @@ public class Core {
      * @param authorization    авторизация
      * @param createNewUser    создание нового пользователя
      */
-    public Core(Menu menu, InputConsole inputConsole,
-                ExitMenu exitMenu, ControllerMeters controllerMeters, Authorization authorization,
-                CreateNewUser createNewUser) {
+    public UserInputOutputService(Menu menu, InputConsole inputConsole,
+                                  ExitMenu exitMenu, ControllerMeters controllerMeters, Authorization authorization,
+                                  CreateNewUser createNewUser) {
         this.menu = menu;
         this.inputConsole = inputConsole;
         this.exitMenu = exitMenu;

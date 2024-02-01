@@ -4,7 +4,7 @@ import ru.homelab.controller.ControllerMeters;
 import ru.homelab.in.ExitMenu;
 import ru.homelab.in.InputConsole;
 import ru.homelab.in.InputUtility;
-import ru.homelab.logicprogram.Core;
+import ru.homelab.service.userinputoutputservice.UserInputOutputService;
 import ru.homelab.model.MeterImpl;
 import ru.homelab.model.Role;
 import ru.homelab.model.Table;
@@ -40,10 +40,10 @@ public class Main {
         Authorization authorization = new Authorization();
         CreateNewUser createNewUser = new CreateNewUser();
 
-        Core core = new Core(menu, inputConsole, exitMenu, controllerMeters, authorization,
+        UserInputOutputService userInputOutputService = new UserInputOutputService(menu, inputConsole, exitMenu, controllerMeters, authorization,
                 createNewUser);
 
-        core.start();
+        userInputOutputService.start();
     }
 
     private static void init() {
