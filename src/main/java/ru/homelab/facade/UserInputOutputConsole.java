@@ -8,7 +8,7 @@ import ru.homelab.entity.Role;
 import ru.homelab.in.ExitMenu;
 import ru.homelab.in.InputConsole;
 import ru.homelab.out.Menu;
-import ru.homelab.security.Authorization;
+import ru.homelab.service.impl.AuthorizationServiceImpl;
 
 /**
  * Основной класс программы, где происходит считывание и отображение данных.
@@ -24,7 +24,7 @@ public class UserInputOutputConsole {
     private final WaterColdController waterColdController;
     private final WaterHotController waterHotController;
     private final UserController userController;
-    private final Authorization authorization;
+    private final AuthorizationServiceImpl authorizationServiceImpl;
 
     /**
      * Instantiates a new Core.
@@ -35,7 +35,7 @@ public class UserInputOutputConsole {
      */
     public UserInputOutputConsole(Menu menu, InputConsole inputConsole, ExitMenu exitMenu,
                                   HeatMeterController heatMeterController, WaterColdController waterColdController, WaterHotController waterHotController,
-                                  UserController userController, Authorization authorization) {
+                                  UserController userController, AuthorizationServiceImpl authorizationServiceImpl) {
         this.menu = menu;
         this.inputConsole = inputConsole;
         this.exitMenu = exitMenu;
@@ -43,7 +43,7 @@ public class UserInputOutputConsole {
         this.waterColdController = waterColdController;
         this.waterHotController = waterHotController;
         this.userController = userController;
-        this.authorization = authorization;
+        this.authorizationServiceImpl = authorizationServiceImpl;
     }
 
     /**
@@ -72,7 +72,7 @@ public class UserInputOutputConsole {
     private void authorization() {
         String login = inputConsole.stringEntry("login:");
         String password = inputConsole.stringEntry("password:");
-        boolean auth = authorization.authorization(login, password);
+        boolean auth = authorizationServiceImpl.authorization(login, password);
         if (auth) {
             userMenu();
         } else {
@@ -83,12 +83,12 @@ public class UserInputOutputConsole {
     private void userMenu() {
         int point;
         do {
-            menu.mainMenuUser(Authorization.CURRENT_USER.get());
+            menu.mainMenuUser(AuthorizationServiceImpl.CURRENT_USER.get());
             point = inputConsole.inputNumberNotString();
-            String login = Authorization.CURRENT_USER.get().getLogin();
+            String login = AuthorizationServiceImpl.CURRENT_USER.get().getLogin();
             switch (point) {
                 case 0:
-                    authorization.logout();
+                    authorizationServiceImpl.logout();
                     break;
                 case 1:
                     System.out.println("Current meter readings:");
@@ -115,7 +115,7 @@ public class UserInputOutputConsole {
                     exitMenu.exitMenu();
                     break;
                 case 5:
-                    String role = Authorization.CURRENT_USER.get().getRole();
+                    String role = AuthorizationServiceImpl.CURRENT_USER.get().getRole();
                     if (role.equals(Role.ADMIN.name())) {
                         adminMenu();
                     } else {
@@ -132,7 +132,7 @@ public class UserInputOutputConsole {
     private void adminMenu() {
         int point;
         do {
-            menu.mainMenuAdmin(Authorization.CURRENT_USER.get());
+            menu.mainMenuAdmin(AuthorizationServiceImpl.CURRENT_USER.get());
             point = inputConsole.inputNumberNotString();
             switch (point) {
                 case 0:

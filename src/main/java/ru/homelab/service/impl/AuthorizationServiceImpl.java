@@ -1,4 +1,4 @@
-package ru.homelab.security;
+package ru.homelab.service.impl;
 
 import ru.homelab.controller.UserController;
 import ru.homelab.entity.MessageAudit;
@@ -13,13 +13,13 @@ import ru.homelab.service.AuditService;
  * @author Petr "mypost@home.ru"
  * @version 1.0
  */
-public class Authorization {
+public class AuthorizationServiceImpl {
     // todo getCurrentUser?
     public static final ThreadLocal<User> CURRENT_USER = new ThreadLocal<>();
     private final UserController userController;
     private final AuditService auditService;
 
-    public Authorization(UserController userController, AuditService auditService) {
+    public AuthorizationServiceImpl(UserController userController, AuditService auditService) {
         this.userController = userController;
         this.auditService = auditService;
     }

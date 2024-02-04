@@ -5,7 +5,7 @@ import ru.homelab.entity.WaterHot;
 import ru.homelab.exception.NoValueException;
 import ru.homelab.exception.ValueAlreadyExistsException;
 import ru.homelab.in.InputConsole;
-import ru.homelab.security.Authorization;
+import ru.homelab.service.impl.AuthorizationServiceImpl;
 import ru.homelab.service.WaterHotService;
 
 import java.util.List;
@@ -44,7 +44,7 @@ public class WaterHotController {
         String message;
         try {
             int value = waterHotService.valueForMonth(year, month,
-                    Authorization.CURRENT_USER.get().getId());
+                    AuthorizationServiceImpl.CURRENT_USER.get().getId());
             message = String.valueOf(value);
         } catch (NoValueException e) {
             message = "нет значения";

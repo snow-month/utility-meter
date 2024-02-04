@@ -5,7 +5,6 @@ import ru.homelab.entity.WaterCold;
 import ru.homelab.exception.NoValueException;
 import ru.homelab.exception.ValueAlreadyExistsException;
 import ru.homelab.repository.WaterColdRepository;
-import ru.homelab.security.Authorization;
 import ru.homelab.service.AuditService;
 import ru.homelab.service.WaterColdService;
 
@@ -62,6 +61,6 @@ public class WaterColdServiceImpl implements WaterColdService {
     }
 
     private static Long currentUserId() {
-        return Authorization.CURRENT_USER.get().getId();
+        return AuthorizationServiceImpl.CURRENT_USER.get().getId();
     }
 }

@@ -3,7 +3,6 @@ package ru.homelab.service.impl;
 import ru.homelab.entity.Audit;
 import ru.homelab.entity.MessageAudit;
 import ru.homelab.repository.AuditRepository;
-import ru.homelab.security.Authorization;
 import ru.homelab.service.AuditService;
 
 import java.util.Date;
@@ -19,8 +18,7 @@ public class AuditServiceImpl implements AuditService {
     @Override
     public void save(MessageAudit messageAudit) {
         String date = new Date().toString();
-        // todo fix
-        long userId = Authorization.CURRENT_USER.get().getId();
+        long userId = AuthorizationServiceImpl.CURRENT_USER.get().getId();
         Audit audit = new Audit(date, messageAudit.name(), userId);
         auditRepository.save(audit);
     }
