@@ -61,6 +61,6 @@ public class WaterHotServiceImpl implements WaterHotService {
     }
 
     private static Long currentUserId() {
-        return AuthorizationServiceImpl.CURRENT_USER.get().getId();
+        return AuthorizationService.CURRENT_USER.get().getId();
     }
 }

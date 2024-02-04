@@ -13,13 +13,13 @@ import ru.homelab.service.AuditService;
  * @author Petr "mypost@home.ru"
  * @version 1.0
  */
-public class AuthorizationServiceImpl {
+public class AuthorizationService {
     // todo getCurrentUser?
     public static final ThreadLocal<User> CURRENT_USER = new ThreadLocal<>();
     private final UserController userController;
     private final AuditService auditService;
 
-    public AuthorizationServiceImpl(UserController userController, AuditService auditService) {
+    public AuthorizationService(UserController userController, AuditService auditService) {
         this.userController = userController;
         this.auditService = auditService;
     }

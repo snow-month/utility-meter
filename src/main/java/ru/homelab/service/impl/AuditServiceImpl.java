@@ -18,7 +18,7 @@ public class AuditServiceImpl implements AuditService {
     @Override
     public void save(MessageAudit messageAudit) {
         String date = new Date().toString();
-        long userId = AuthorizationServiceImpl.CURRENT_USER.get().getId();
+        long userId = AuthorizationService.CURRENT_USER.get().getId();
         Audit audit = new Audit(date, messageAudit.name(), userId);
         auditRepository.save(audit);
     }

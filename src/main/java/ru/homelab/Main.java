@@ -10,7 +10,7 @@ import ru.homelab.in.InputConsole;
 import ru.homelab.out.Menu;
 import ru.homelab.repository.*;
 import ru.homelab.repository.impl.*;
-import ru.homelab.service.impl.AuthorizationServiceImpl;
+import ru.homelab.service.impl.AuthorizationService;
 import ru.homelab.service.*;
 import ru.homelab.service.impl.*;
 import ru.homelab.utils.PropertiesApp;
@@ -63,10 +63,10 @@ public class Main {
         UserService userService = new UserServiceImpl(userRepository);
         UserController userController = new UserController(userService);
 
-        AuthorizationServiceImpl authorizationServiceImpl = new AuthorizationServiceImpl(userController, auditService);
+        AuthorizationService authorizationService = new AuthorizationService(userController, auditService);
 
         UserInputOutputConsole userInputOutputConsoleService = new UserInputOutputConsole(menu, inputConsole, exitMenu,
-                heatMeterController, waterColdController, waterHotController, userController, authorizationServiceImpl);
+                heatMeterController, waterColdController, waterHotController, userController, authorizationService);
 
         userInputOutputConsoleService.start();
     }
