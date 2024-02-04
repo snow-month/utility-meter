@@ -1,6 +1,6 @@
 package ru.homelab.out;
 
-import ru.homelab.model.User;
+import ru.homelab.entity.User;
 
 /**
  * Класс для всех меню.
@@ -29,13 +29,14 @@ public class Menu {
      * @param user the user
      */
     public void mainMenuUser(User user) {
-        System.out.println("user: " + user.login());
+        System.out.println("user: " + user.getLogin());
         System.out.println("Main menu:");
         System.out.println("Select an item and click enter:");
         System.out.println("1 - To get up-to-date meter readings");
         System.out.println("2 - To send meter readings");
         System.out.println("3 - To view readings for a specific month");
         System.out.println("4 - To view the history of the testimony");
+        System.out.println("5 - View all users (ADMIN ONLY)");
         System.out.println("0 - logout");
     }
 
@@ -45,11 +46,11 @@ public class Menu {
      * @param user the user
      */
     public void mainMenuAdmin(User user) {
-        System.out.println("user: " + user.login() + ", role: ADMIN");
-        System.out.println("Main menu:");
+        System.out.println("user: " + user.getLogin() + ", role: ADMIN");
+        System.out.println("Main menu admin:");
         System.out.println("Select an item and click enter:");
         System.out.println("1 - To view user readings");
-        System.out.println("0 - logout");
+        System.out.println("0 - exit menu");
     }
 
     /**
@@ -64,6 +65,6 @@ public class Menu {
         System.out.println("1 - To add heat indicators");
         System.out.println("2 - To add cold water indicators");
         System.out.println("3 - To add hot water indicators");
-        System.out.println("0 - Main menu");
+        System.out.println("0 - exit menu");
     }
 }

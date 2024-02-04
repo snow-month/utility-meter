@@ -1,7 +1,8 @@
 package ru.homelab.security;
 
-import ru.homelab.model.Table;
-import ru.homelab.model.User;
+import ru.homelab.controller.UserController;
+import ru.homelab.entity.User;
+import ru.homelab.exception.NoUserException;
 
 /**
  * Класс для авторизации.
@@ -10,15 +11,12 @@ import ru.homelab.model.User;
  * @version 1.0
  */
 public class Authorization {
-    private User user;
+    // todo getCurrentUser?
+    public static final ThreadLocal<User> CURRENT_USER = new ThreadLocal<>();
+    private final UserController userController;
 
-    /**
-     * Current user user.
-     *
-     * @return the user
-     */
-    public User currentUser() {
-        return user;
+    public Authorization(UserController userController) {
+        this.userController = userController;
     }
 
     /**
@@ -27,16 +25,20 @@ public class Authorization {
      * @return the boolean
      */
     public boolean authorization(String login, String password) {
-        User userTable;
-        if (Table.USERS.containsKey(login)) {
-            userTable = Table.USERS.get(login);
-        } else {
+        try {
+            User userDb = userController.getUserByLogin(login);
+            if (userDb.getPassword().equals(password)) {
+                User user = new User(
+                        userDb.getId(),
+                        userDb.getLogin(),
+                        null,
+                        userDb.getRole()
+                );
+                CURRENT_USER.set(user);
+                return true;
+            }
+        } catch (NoUserException e) {
             return false;
-        }
-
-        if (userTable.password().equals(password)) {
-            user = userTable;
-            return true;
         }
         return false;
     }
@@ -44,7 +46,7 @@ public class Authorization {
     /**
      * Метод для logout.
      */
-    public void logout() {
-        user = null;
+    public static void logout() {
+        CURRENT_USER.remove();
     }
 }

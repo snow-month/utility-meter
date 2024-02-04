@@ -15,7 +15,7 @@ public class InputUtility {
      *
      * @return the int
      */
-    public int readingNumber() {
+    public int inputNumberNotString() {
         Scanner scanner = new Scanner(System.in);
         int point;
 
@@ -34,22 +34,17 @@ public class InputUtility {
     /**
      * Метод для считывания строки.
      *
+     * @param message сообщение которое, отобразиться перед вводом
      * @return the string
      */
-    public String readingStr() {
+    public String stringEntry(String message) {
+        System.out.println(message);
         Scanner scanner = new Scanner(System.in);
         return scanner.next();
     }
 
-    /**
-     * Метод для считывания строки.
-     *
-     * @param message сообщение которое, отобразиться перед вводом
-     * @return the string
-     */
-    public String readingStr(String message) {
+    public Integer numberEntry(String message) {
         System.out.println(message);
-        Scanner scanner = new Scanner(System.in);
-        return scanner.next();
+        return inputNumberNotString();
     }
 }

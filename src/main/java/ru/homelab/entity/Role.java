@@ -1,4 +1,4 @@
-package ru.homelab.model;
+package ru.homelab.entity;
 
 /**
  * Enum для ролей безопасности.

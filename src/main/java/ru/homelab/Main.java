@@ -1,21 +1,20 @@
 package ru.homelab;
 
-import ru.homelab.controller.ControllerMeters;
+import ru.homelab.controller.HeatMeterController;
+import ru.homelab.controller.UserController;
+import ru.homelab.controller.WaterColdController;
+import ru.homelab.controller.WaterHotController;
+import ru.homelab.facade.UserInputOutputConsole;
 import ru.homelab.in.ExitMenu;
 import ru.homelab.in.InputConsole;
-import ru.homelab.in.InputUtility;
-import ru.homelab.service.userinputoutputservice.UserInputOutputService;
-import ru.homelab.model.MeterImpl;
-import ru.homelab.model.Role;
-import ru.homelab.model.Table;
-import ru.homelab.model.User;
 import ru.homelab.out.Menu;
+import ru.homelab.repository.*;
+import ru.homelab.repository.impl.*;
 import ru.homelab.security.Authorization;
-import ru.homelab.security.CreateNewUser;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import ru.homelab.service.*;
+import ru.homelab.service.impl.*;
+import ru.homelab.utils.PropertiesApp;
+// todo многопоточность, чтобы много пользователей одновременно
 
 /**
  * Класс запуска программы.
@@ -30,44 +29,44 @@ public class Main {
      * @param args the input arguments
      */
     public static void main(String[] args) {
-        init();
+        PropertiesApp propApp = new PropertiesApp();
+        InitDbService initDbService = new InitDbService();
+        initDbService.init(propApp.getUrl(), propApp.getUsername(), propApp.getPassword());
+
+        // задержка для создания таблиц
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+        }
 
         Menu menu = new Menu();
-        InputUtility inputUtility = new InputUtility();
         InputConsole inputConsole = new InputConsole();
         ExitMenu exitMenu = new ExitMenu();
-        ControllerMeters controllerMeters = new ControllerMeters(inputUtility);
-        Authorization authorization = new Authorization();
-        CreateNewUser createNewUser = new CreateNewUser();
 
-        UserInputOutputService userInputOutputService = new UserInputOutputService(menu, inputConsole, exitMenu, controllerMeters, authorization,
-                createNewUser);
+        AuditRepository auditRepository = new AuditRepositoryImpl();
+        AuditService auditService = new AuditServiceImpl(auditRepository);
 
-        userInputOutputService.start();
-    }
+        HeatMeterRepository heatMeterRepository = new HeatMeterRepositoryImpl(propApp);
+        HeatMeterService heatMeterService = new HeatMeterServiceImpl(heatMeterRepository, auditService);
+        HeatMeterController heatMeterController = new HeatMeterController(heatMeterService);
 
-    private static void init() {
-        User user = new User("user", Role.USER, "user");
-        Table.USERS.put(user.login(), user);
-        Table.LOGGER.put(user.login(), new ArrayList<>());
+        WaterColdRepository waterColdRepository = new WaterColdRepositoryImpl(propApp);
+        WaterColdService waterColdService = new WaterColdServiceImpl(waterColdRepository, auditService);
+        WaterColdController waterColdController = new WaterColdController(waterColdService);
 
-        List<Integer> heating = new ArrayList<>(
-                Arrays.asList(12, 25, 44, 57, 74, 82, 91, 105, 120, 132, 149, 160));
-        MeterImpl meterHeating = new MeterImpl(2023, heating);
-        Table.HEATING.put(user.login(), meterHeating);
+        WaterHotRepository waterHotRepository = new WaterHotRepositoryImpl(propApp);
+        WaterHotService waterHotService = new WaterHotServiceImpl(waterHotRepository, auditService);
+        WaterHotController waterHotController = new WaterHotController(waterHotService);
 
-        List<Integer> waterCold = new ArrayList<>(
-                Arrays.asList(121, 252, 414, 567, 734, 832, 931, 1052, 1202, 1322, 1491, 1603));
-        MeterImpl meterWaterCold = new MeterImpl(2023, waterCold);
-        Table.WATER_COLD.put(user.login(), meterWaterCold);
+        UserRepository userRepository = new UserRepositoryImpl(propApp);
+        UserService userService = new UserServiceImpl(userRepository, auditService);
+        UserController userController = new UserController(userService);
 
-        List<Integer> waterHot = new ArrayList<>(
-                Arrays.asList(122, 253, 441, 574, 745, 826, 911, 1055, 1208, 1322, 1491, 1601));
-        MeterImpl meterWaterHot = new MeterImpl(2023, waterHot);
-        Table.WATER_HOT.put(user.login(), meterWaterHot);
+        Authorization authorization = new Authorization(userController);
 
-        User admin = new User("admin", Role.ADMIN, "admin");
-        Table.USERS.put(admin.login(), admin);
-        Table.LOGGER.put(admin.login(), new ArrayList<>());
+        UserInputOutputConsole userInputOutputConsoleService = new UserInputOutputConsole(menu, inputConsole, exitMenu,
+                heatMeterController, waterColdController, waterHotController, userController, authorization);
+
+        userInputOutputConsoleService.start();
     }
 }

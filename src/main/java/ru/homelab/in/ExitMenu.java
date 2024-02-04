@@ -12,23 +12,7 @@ public class ExitMenu extends InputUtility {
      */
     public void exitMenu() {
         System.out.println("0 - exit menu");
-        readingNumber();
-    }
-
-    /**
-     * Выход в главное меню.
-     */
-    public void exitMainMenu() {
-        System.out.println("0 - Main menu");
-        readingNumber();
-    }
-
-    /**
-     * Выход в меню добавления показаний.
-     */
-    public void exitAddValueMenu() {
-        System.out.println("0 - AddValueMenu");
-        readingNumber();
+        inputNumberNotString();
     }
 
     /**

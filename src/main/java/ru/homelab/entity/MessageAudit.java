@@ -1,4 +1,4 @@
-package ru.homelab.utils.log;
+package ru.homelab.entity;
 
 /**
  * Enum действия пользователя.
@@ -6,7 +6,7 @@ package ru.homelab.utils.log;
  * @author Petr "mypost@home.ru"
  * @version 1.0
  */
-public enum Audit {
+public enum MessageAudit {
     /**
      * Authorization audit.
      */
@@ -34,5 +34,6 @@ public enum Audit {
     /**
      * Create new user audit.
      */
-    CREATE_NEW_USER
+    CREATE_NEW_USER,
+    ADD_VALUE
 }
