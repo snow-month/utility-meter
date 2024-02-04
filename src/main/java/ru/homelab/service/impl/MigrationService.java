@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class InitDbService {
+public class MigrationService {
     public void init(String url, String username, String password) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             Database database = DatabaseFactory.getInstance()

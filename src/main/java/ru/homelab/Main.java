@@ -31,8 +31,8 @@ public class Main {
      */
     public static void main(String[] args) {
         PropertiesApp propApp = new PropertiesApp();
-        InitDbService initDbService = new InitDbService();
-        initDbService.init(propApp.getUrl(), propApp.getUsername(), propApp.getPassword());
+        MigrationService migrationService = new MigrationService();
+        migrationService.init(propApp.getUrl(), propApp.getUsername(), propApp.getPassword());
 
         // задержка для создания таблиц
         try {
