@@ -15,6 +15,7 @@ import ru.homelab.service.*;
 import ru.homelab.service.impl.*;
 import ru.homelab.utils.PropertiesApp;
 // todo многопоточность, чтобы много пользователей одновременно
+// todo commit transactional
 
 /**
  * Класс запуска программы.
@@ -43,7 +44,7 @@ public class Main {
         InputConsole inputConsole = new InputConsole();
         ExitMenu exitMenu = new ExitMenu();
 
-        AuditRepository auditRepository = new AuditRepositoryImpl();
+        AuditRepository auditRepository = new AuditRepositoryImpl(propApp);
         AuditService auditService = new AuditServiceImpl(auditRepository);
 
         HeatMeterRepository heatMeterRepository = new HeatMeterRepositoryImpl(propApp);
@@ -59,10 +60,10 @@ public class Main {
         WaterHotController waterHotController = new WaterHotController(waterHotService);
 
         UserRepository userRepository = new UserRepositoryImpl(propApp);
-        UserService userService = new UserServiceImpl(userRepository, auditService);
+        UserService userService = new UserServiceImpl(userRepository);
         UserController userController = new UserController(userService);
 
-        Authorization authorization = new Authorization(userController);
+        Authorization authorization = new Authorization(userController, auditService);
 
         UserInputOutputConsole userInputOutputConsoleService = new UserInputOutputConsole(menu, inputConsole, exitMenu,
                 heatMeterController, waterColdController, waterHotController, userController, authorization);

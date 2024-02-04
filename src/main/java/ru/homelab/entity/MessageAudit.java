@@ -35,5 +35,6 @@ public enum MessageAudit {
      * Create new user audit.
      */
     CREATE_NEW_USER,
-    ADD_VALUE
+    ADD_VALUE,
+    LOGOUT
 }

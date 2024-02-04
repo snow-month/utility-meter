@@ -1,8 +1,11 @@
 package ru.homelab.security;
 
 import ru.homelab.controller.UserController;
+import ru.homelab.entity.MessageAudit;
 import ru.homelab.entity.User;
 import ru.homelab.exception.NoUserException;
+import ru.homelab.service.AuditService;
+// todo service?
 
 /**
  * Класс для авторизации.
@@ -14,9 +17,11 @@ public class Authorization {
     // todo getCurrentUser?
     public static final ThreadLocal<User> CURRENT_USER = new ThreadLocal<>();
     private final UserController userController;
+    private final AuditService auditService;
 
-    public Authorization(UserController userController) {
+    public Authorization(UserController userController, AuditService auditService) {
         this.userController = userController;
+        this.auditService = auditService;
     }
 
     /**
@@ -35,6 +40,7 @@ public class Authorization {
                         userDb.getRole()
                 );
                 CURRENT_USER.set(user);
+                auditService.save(MessageAudit.AUTHORIZATION);
                 return true;
             }
         } catch (NoUserException e) {
@@ -46,7 +52,8 @@ public class Authorization {
     /**
      * Метод для logout.
      */
-    public static void logout() {
+    public void logout() {
+        auditService.save(MessageAudit.LOGOUT);
         CURRENT_USER.remove();
     }
 }

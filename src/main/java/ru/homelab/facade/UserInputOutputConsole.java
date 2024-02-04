@@ -88,7 +88,7 @@ public class UserInputOutputConsole {
             String login = Authorization.CURRENT_USER.get().getLogin();
             switch (point) {
                 case 0:
-                    Authorization.logout();
+                    authorization.logout();
                     break;
                 case 1:
                     System.out.println("Current meter readings:");
