@@ -32,7 +32,7 @@ public class UserRepositoryImpl implements UserRepository {
                 throw new NoUserException("нет пользователя с логином - " + login);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Sql exception: " + e.getMessage());
         }
         return user;
     }
@@ -49,7 +49,7 @@ public class UserRepositoryImpl implements UserRepository {
             statement.setString(3, user.getRole());
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Sql exception: " + e.getMessage());
         }
     }
 }

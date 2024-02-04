@@ -33,7 +33,7 @@ public class WaterColdRepositoryImpl implements WaterColdRepository {
                 throw new NoValueException("no value");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Sql exception: " + e.getMessage());
         }
         return currentValue;
     }
@@ -57,7 +57,7 @@ public class WaterColdRepositoryImpl implements WaterColdRepository {
                 throw new NoValueException("no value");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Sql exception: " + e.getMessage());
         }
         return valueForMonth;
     }
@@ -81,7 +81,7 @@ public class WaterColdRepositoryImpl implements WaterColdRepository {
             statement.setLong(4, user_id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Sql exception: " + e.getMessage());
         }
         return true;
     }
@@ -103,7 +103,7 @@ public class WaterColdRepositoryImpl implements WaterColdRepository {
                 waterColds.add(waterCold);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Sql exception: " + e.getMessage());
         }
         return waterColds;
     }
@@ -123,7 +123,7 @@ public class WaterColdRepositoryImpl implements WaterColdRepository {
                 waterColds.add(waterCold);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Sql exception: " + e.getMessage());
         }
         return waterColds;
     }
