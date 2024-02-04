@@ -53,7 +53,19 @@ Select an item and click enter:
 Вводим login и password.
 
 ```
-
+Select an item and click enter:
+1 - Sign in
+2 - Sign up
+0 - exit
+2
+Creating a new user. Enter login:
+new_user
+Enter password
+123
+Confirm the password
+123
+success
+0 - exit menu
 ```
 Вводим цифру 0 и выходим из меню создания пользователя.
 
@@ -74,125 +86,94 @@ user
 Введите пароль
 user
 ```
-5. Главное меню для просмотра и передачи показаний счётчмков.
+5. Главное меню для просмотра и передачи показаний счётчиков.
 
 ```
 user: user
 Main menu:
-Выберите пункт и нажмите энтер:
-1 - для получения актуальных показаний счетчиков
-2 - для отправки показаний счётчиков
-3 - для просмотра показаний за конкретный месяц
-4 - для просмотра истории подачи показаний
+Select an item and click enter:
+1 - To get up-to-date meter readings
+2 - To send meter readings
+3 - To view readings for a specific month
+4 - To view the history of the testimony
+5 - View all users (ADMIN ONLY)
 0 - logout
 ```
 6. Получения актуальных показаний счетчиков.
 ```
 1
-Текущие показания счётчиков:
-HEATING: 160
-WATER_COLD: 1603
-WATER_HOT: 1601
-0 - Main menu
+Current meter readings:
+HEATING: 122
+WATER_COLD: There is no indication
+WATER_HOT: There is no indication
+0 - exit menu
 ```
 7. Отправка показаний счётчиков.
 ```
+2
 user: user
 Add value menu:
-Выберите пункт и нажмите энтер:
-1 - для добавление показателей тепла
-2 - для добавление показателей холодной воды
-3 - для добавление показателей горячей воды
-0 - Main menu
-2
-Введите показание счётчика WATER_COLD:
-3143
-Показания добавлены.
-0 - Add value menu
+Select an item and click enter:
+1 - To add heat indicators
+2 - To add cold water indicators
+3 - To add hot water indicators
+0 - exit menu
+1
+Enter the meter reading HEATING:
+2234
+Readings added
+0 - exit menu
 ```
 8. Просмотр показаний за конкретный месяц.
 ```
-user: user
-Main menu:
-Выберите пункт и нажмите энтер:
-1 - для получения актуальных показаний счетчиков
-2 - для отправки показаний счётчиков
-3 - для просмотра показаний за конкретный месяц
-4 - для просмотра истории подачи показаний
-0 - logout
 3
-Введите номер месяца (1-12)
-1
-Показание за месяц 2 HEATING: 0
-Показание за месяц 2 WATER_COLD: 3143
-Показание за месяц 2 WATER_HOT: 0
-0 - Main menu
+Enter the year:
+2023
+Enter the month (1-12):
+6
+значение за месяц: 67
+значение за месяц: нет значения
+значение за месяц: нет значения
+0 - exit menu
 ```
 9. Просмотр истории подачи показаний.
 ```
-user: user
-Main menu:
-Выберите пункт и нажмите энтер:
-1 - для получения актуальных показаний счетчиков
-2 - для отправки показаний счётчиков
-3 - для просмотра показаний за конкретный месяц
-4 - для просмотра истории подачи показаний
-0 - logout
 4
-История подачи показаний HEATING:
-2023
-12 25 44 57 74 82 91 105 120 132 149 160 
-История подачи показаний WATER_COLD:
-2023
-121 252 414 567 734 832 931 1052 1202 1322 1491 1603 
-2024
-3143 
-История подачи показаний WATER_HOT:
-2023
-122 253 441 574 745 826 911 1055 1208 1322 1491 1601 
-0 - Main menu
+Все показания HEATING:
+year 2024, month 1, value: 2234
+year 2023, month 11, value: 122
+year 2023, month 6, value: 67
+year 2023, month 4, value: 42
+year 2023, month 2, value: 22
+Нет показаний WATER_COLD.
+Нет показаний WATER_HOT.
+0 - exit menu
 ```
 10. Меню для admin
 ```
-Greeting menu:
-Default:
-login: user, password: user, role: USER
-login: admin, password: admin, role: ADMIN
-Выберите пункт и нажмите энтер:
-1 - Sign in
-2 - Sign up
-0 - exit
-1
-Ваш логин
-admin
-Введите пароль
-admin
+5
 user: admin, role: ADMIN
-Main menu:
-Выберите пункт и нажмите энтер:
-1 - Для просмотра показаний пользователей
-0 - logout
+Main menu admin:
+Select an item and click enter:
+1 - To view user readings
+0 - exit menu
 ```
 11. Просмотр показаний пользователей.
 ```
-Main menu:
-Выберите пункт и нажмите энтер:
-1 - Для просмотра показаний пользователей
-0 - logout
+5
+user: admin, role: ADMIN
+Main menu admin:
+Select an item and click enter:
+1 - To view user readings
+0 - exit menu
 1
-Для просмотра показаний пользователей введите имя пользоателя и нажмите энтер
-newuser user 
-user
-История подачи показаний HEATING:
-2023
-12 25 44 57 74 82 91 105 120 132 149 160 
-История подачи показаний WATER_COLD:
-2023
-121 252 414 567 734 832 931 1052 1202 1322 1491 1603 
-2024
-3143 
-История подачи показаний WATER_HOT:
-2023
-122 253 441 574 745 826 911 1055 1208 1322 1491 1601 
-0 - Main menu
+Все показания HEATING:
+year 2023, month 2, value: 22
+year 2023, month 4, value: 42
+year 2023, month 6, value: 67
+year 2023, month 11, value: 122
+year 2024, month 1, value: 2234
+Нет показаний WATER_COLD.
+Нет показаний WATER_HOT.
+0 - exit menu
 ```
