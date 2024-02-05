@@ -14,11 +14,20 @@ import ru.homelab.service.AuditService;
  * @version 1.0
  */
 public class AuthorizationService {
-    // todo getCurrentUser?
+    /**
+     * The constant CURRENT_USER.
+     */
+// todo getCurrentUser?
     public static final ThreadLocal<User> CURRENT_USER = new ThreadLocal<>();
     private final UserController userController;
     private final AuditService auditService;
 
+    /**
+     * Instantiates a new Authorization service.
+     *
+     * @param userController the user controller
+     * @param auditService   the audit service
+     */
     public AuthorizationService(UserController userController, AuditService auditService) {
         this.userController = userController;
         this.auditService = auditService;
@@ -27,6 +36,8 @@ public class AuthorizationService {
     /**
      * Метод для авторизации пользователя.
      *
+     * @param login    the login
+     * @param password the password
      * @return the boolean
      */
     public boolean authorization(String login, String password) {

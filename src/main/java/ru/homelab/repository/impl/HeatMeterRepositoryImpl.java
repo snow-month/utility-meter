@@ -10,9 +10,17 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Heat meter repository.
+ */
 public class HeatMeterRepositoryImpl implements HeatMeterRepository {
     private final PropertiesApp property;
 
+    /**
+     * Instantiates a new Heat meter repository.
+     *
+     * @param property the property
+     */
     public HeatMeterRepositoryImpl(PropertiesApp property) {
         this.property = property;
     }

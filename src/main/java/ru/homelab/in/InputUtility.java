@@ -43,6 +43,12 @@ public class InputUtility {
         return scanner.next();
     }
 
+    /**
+     * Number entry integer.
+     *
+     * @param message the message
+     * @return the integer
+     */
     public Integer numberEntry(String message) {
         System.out.println(message);
         return inputNumberNotString();

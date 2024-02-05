@@ -29,9 +29,14 @@ public class UserInputOutputConsole {
     /**
      * Instantiates a new Core.
      *
-     * @param menu         меню для выбора пункта
-     * @param inputConsole чтение данных из консоли
-     * @param exitMenu     меню выхода в верхнее меню
+     * @param menu                 меню для выбора пункта
+     * @param inputConsole         чтение данных из консоли
+     * @param exitMenu             меню выхода в верхнее меню
+     * @param heatMeterController  the heat meter controller
+     * @param waterColdController  the water cold controller
+     * @param waterHotController   the water hot controller
+     * @param userController       the user controller
+     * @param authorizationService the authorization service
      */
     public UserInputOutputConsole(Menu menu, InputConsole inputConsole, ExitMenu exitMenu,
                                   HeatMeterController heatMeterController, WaterColdController waterColdController, WaterHotController waterHotController,

@@ -11,10 +11,19 @@ import ru.homelab.service.WaterHotService;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * The type Water hot service.
+ */
 public class WaterHotServiceImpl implements WaterHotService {
     private final WaterHotRepository waterHotRepository;
     private final AuditService auditService;
 
+    /**
+     * Instantiates a new Water hot service.
+     *
+     * @param waterHotRepository the water hot repository
+     * @param auditService       the audit service
+     */
     public WaterHotServiceImpl(WaterHotRepository waterHotRepository, AuditService auditService) {
         this.waterHotRepository = waterHotRepository;
         this.auditService = auditService;

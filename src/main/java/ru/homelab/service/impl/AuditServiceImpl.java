@@ -8,9 +8,17 @@ import ru.homelab.service.AuditService;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Audit service.
+ */
 public class AuditServiceImpl implements AuditService {
     private final AuditRepository auditRepository;
 
+    /**
+     * Instantiates a new Audit service.
+     *
+     * @param auditRepository the audit repository
+     */
     public AuditServiceImpl(AuditRepository auditRepository) {
         this.auditRepository = auditRepository;
     }

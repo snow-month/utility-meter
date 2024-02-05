@@ -7,9 +7,17 @@ import ru.homelab.utils.PropertiesApp;
 
 import java.sql.*;
 
+/**
+ * The type User repository.
+ */
 public class UserRepositoryImpl implements UserRepository {
     private final PropertiesApp property;
 
+    /**
+     * Instantiates a new User repository.
+     *
+     * @param property the property
+     */
     public UserRepositoryImpl(PropertiesApp property) {
         this.property = property;
     }

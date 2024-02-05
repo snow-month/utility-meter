@@ -12,12 +12,27 @@ public final class Audit {
     private String messageAudit;
     private Long userId;
 
+    /**
+     * Instantiates a new Audit.
+     *
+     * @param date         the date
+     * @param messageAudit the message audit
+     * @param userId       the user id
+     */
     public Audit(String date, String messageAudit, Long userId) {
         this.date = date;
         this.messageAudit = messageAudit;
         this.userId = userId;
     }
 
+    /**
+     * Instantiates a new Audit.
+     *
+     * @param id           the id
+     * @param date         the date
+     * @param messageAudit the message audit
+     * @param userId       the user id
+     */
     public Audit(Long id, String date, String messageAudit, Long userId) {
         this.id = id;
         this.date = date;
@@ -25,18 +40,38 @@ public final class Audit {
         this.userId = userId;
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Gets date.
+     *
+     * @return the date
+     */
     public String getDate() {
         return date;
     }
 
+    /**
+     * Gets message audit.
+     *
+     * @return the message audit
+     */
     public String getMessageAudit() {
         return messageAudit;
     }
 
+    /**
+     * Gets user id.
+     *
+     * @return the user id
+     */
     public Long getUserId() {
         return userId;
     }

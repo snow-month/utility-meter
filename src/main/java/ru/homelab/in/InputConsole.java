@@ -29,6 +29,12 @@ public class InputConsole extends InputUtility {
         return password;
     }
 
+    /**
+     * Value input integer.
+     *
+     * @param meter the meter
+     * @return the integer
+     */
     public Integer valueInput(NameMeter meter) {
         System.out.println("Enter the meter reading " + meter.name() + ":");
         return inputNumberNotString();

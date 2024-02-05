@@ -8,9 +8,17 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Audit repository.
+ */
 public class AuditRepositoryImpl implements AuditRepository {
     private final PropertiesApp property;
 
+    /**
+     * Instantiates a new Audit repository.
+     *
+     * @param property the property
+     */
     public AuditRepositoryImpl(PropertiesApp property) {
         this.property = property;
     }

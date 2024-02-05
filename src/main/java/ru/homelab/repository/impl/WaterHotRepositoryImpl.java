@@ -10,9 +10,17 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Water hot repository.
+ */
 public class WaterHotRepositoryImpl implements WaterHotRepository {
     private final PropertiesApp property;
 
+    /**
+     * Instantiates a new Water hot repository.
+     *
+     * @param property the property
+     */
     public WaterHotRepositoryImpl(PropertiesApp property) {
         this.property = property;
     }

@@ -11,10 +11,19 @@ import ru.homelab.service.HeatMeterService;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * The type Heat meter service.
+ */
 public class HeatMeterServiceImpl implements HeatMeterService {
     private final HeatMeterRepository heatMeterRepository;
     private final AuditService auditService;
 
+    /**
+     * Instantiates a new Heat meter service.
+     *
+     * @param heatMeterRepository the heat meter repository
+     * @param auditService        the audit service
+     */
     public HeatMeterServiceImpl(HeatMeterRepository heatMeterRepository, AuditService auditService) {
         this.heatMeterRepository = heatMeterRepository;
         this.auditService = auditService;

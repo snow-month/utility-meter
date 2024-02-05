@@ -10,13 +10,24 @@ import ru.homelab.service.WaterColdService;
 
 import java.util.List;
 
+/**
+ * The type Water cold controller.
+ */
 public class WaterColdController {
     private final WaterColdService waterColdService;
 
+    /**
+     * Instantiates a new Water cold controller.
+     *
+     * @param waterColdService the water cold service
+     */
     public WaterColdController(WaterColdService waterColdService) {
         this.waterColdService = waterColdService;
     }
 
+    /**
+     * Current value.
+     */
     public void currentValue() {
         Integer value;
         String message;
@@ -29,6 +40,9 @@ public class WaterColdController {
         System.out.println(NameMeter.WATER_COLD + ": " + message);
     }
 
+    /**
+     * Add value.
+     */
     public void addValue() {
         InputConsole inputConsole = new InputConsole();
         Integer value = inputConsole.valueInput(NameMeter.WATER_COLD);
@@ -40,6 +54,12 @@ public class WaterColdController {
         }
     }
 
+    /**
+     * Value for month.
+     *
+     * @param year  the year
+     * @param month the month
+     */
     public void valueForMonth(int year, int month) {
         String message;
         try {
@@ -52,11 +72,17 @@ public class WaterColdController {
         System.out.println("значение за месяц: " + message);
     }
 
+    /**
+     * All values user.
+     */
     public void allValuesUser() {
         List<WaterCold> waterColds = waterColdService.allValuesUser();
         printAllValues(waterColds);
     }
 
+    /**
+     * All values.
+     */
     public void allValues() {
         List<WaterCold> waterColds = waterColdService.allValue();
         printAllValues(waterColds);

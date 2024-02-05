@@ -17,6 +17,7 @@ public interface WaterColdService {
      * Метод возвращает текущее значение.
      *
      * @return the integer
+     * @throws NoValueException the no value exception
      */
     Integer currentValue() throws NoValueException;
 
@@ -25,13 +26,16 @@ public interface WaterColdService {
      *
      * @param value добавляемое значение
      * @return the boolean
+     * @throws ValueAlreadyExistsException the value already exists exception
      */
     boolean addValue(int value) throws ValueAlreadyExistsException;
 
     /**
      * Метод возвращает значение по номеру месяца.
      *
-     * @param month номер месяца
+     * @param year   the year
+     * @param month  номер месяца
+     * @param userId the user id
      * @return the integer
      * @throws NoValueException the exception
      */
@@ -44,5 +48,10 @@ public interface WaterColdService {
      */
     List<WaterCold> allValuesUser();
 
+    /**
+     * All value list.
+     *
+     * @return the list
+     */
     List<WaterCold> allValue();
 }

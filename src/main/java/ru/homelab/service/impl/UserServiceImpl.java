@@ -5,9 +5,17 @@ import ru.homelab.exception.NoUserException;
 import ru.homelab.repository.UserRepository;
 import ru.homelab.service.UserService;
 
+/**
+ * The type User service.
+ */
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
+    /**
+     * Instantiates a new User service.
+     *
+     * @param userRepository the user repository
+     */
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }

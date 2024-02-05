@@ -11,7 +11,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * The type Migration service.
+ */
 public class MigrationService {
+    /**
+     * Init.
+     *
+     * @param url      the url
+     * @param username the username
+     * @param password the password
+     */
     public void init(String url, String username, String password) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             Database database = DatabaseFactory.getInstance()
