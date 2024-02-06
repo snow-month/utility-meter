@@ -10,7 +10,7 @@ import java.util.Properties;
 public class PropertiesApp {
     private final String url;
     private final String username;
-    private final String password;
+    private String password;
 
     /**
      * Instantiates a new Properties app.
@@ -28,6 +28,12 @@ public class PropertiesApp {
         this.url = prop.getProperty("jdbc.url");
         this.username = prop.getProperty("jdbc.username");
         this.password = prop.getProperty("jdbc.password");
+    }
+
+    public PropertiesApp(String url, String username, String password) {
+        this.url = url;
+        this.username = username;
+        this.password = password;
     }
 
     /**
@@ -55,5 +61,9 @@ public class PropertiesApp {
      */
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
