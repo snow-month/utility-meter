@@ -30,7 +30,7 @@ public class HeatMeterRepositoryImpl implements HeatMeterRepository {
         try (Connection connection = DriverManager.getConnection(property.getUrl(),
                 property.getUsername(), property.getPassword())) {
             PreparedStatement statement = connection
-                    .prepareStatement("SELECT value FROM company.heat_liquibase WHERE user_id = ?" +
+                    .prepareStatement("SELECT value FROM heat_liquibase WHERE user_id = ?" +
                             " order by year DESC, month DESC limit 1");
             statement.setLong(1, userId);
 
@@ -52,7 +52,7 @@ public class HeatMeterRepositoryImpl implements HeatMeterRepository {
         try (Connection connection = DriverManager.getConnection(property.getUrl(),
                 property.getUsername(), property.getPassword())) {
             PreparedStatement statement = connection
-                    .prepareStatement("SELECT value FROM company.heat_liquibase WHERE " +
+                    .prepareStatement("SELECT value FROM heat_liquibase WHERE " +
                             "year = ? and month = ? and user_id = ?");
             statement.setInt(1, year);
             statement.setInt(2, month);
@@ -81,7 +81,7 @@ public class HeatMeterRepositoryImpl implements HeatMeterRepository {
             }
 
             PreparedStatement statement = connection
-                    .prepareStatement("INSERT INTO company.heat_liquibase " +
+                    .prepareStatement("INSERT INTO heat_liquibase " +
                             "(value, year, month, user_id) VALUES (? ,? ,? , ?)");
             statement.setInt(1, value);
             statement.setInt(2, year);
@@ -101,7 +101,7 @@ public class HeatMeterRepositoryImpl implements HeatMeterRepository {
         try (Connection connection = DriverManager.getConnection(property.getUrl(),
                 property.getUsername(), property.getPassword())) {
             PreparedStatement statement = connection
-                    .prepareStatement("SELECT * FROM company.heat_liquibase WHERE user_id = ? " +
+                    .prepareStatement("SELECT * FROM heat_liquibase WHERE user_id = ? " +
                             "order by year DESC, month DESC");
             statement.setLong(1, userId);
             ResultSet resultSet = statement.executeQuery();
@@ -123,7 +123,7 @@ public class HeatMeterRepositoryImpl implements HeatMeterRepository {
         try (Connection connection = DriverManager.getConnection(property.getUrl(),
                 property.getUsername(), property.getPassword())) {
             PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM company.heat_liquibase;");
+                    "SELECT * FROM heat_liquibase;");
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {

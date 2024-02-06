@@ -27,7 +27,7 @@ public class AuditRepositoryImpl implements AuditRepository {
     public void save(Audit audit) {
         try (Connection connection = DriverManager.getConnection(property.getUrl(),
                 property.getUsername(), property.getPassword())) {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO company.audit_liquibase" +
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO audit_liquibase" +
                     " (date, message_audit, user_id) VALUES (?,?,?);");
             statement.setString(1, audit.getDate());
             statement.setString(2, audit.getMessageAudit());
@@ -44,7 +44,7 @@ public class AuditRepositoryImpl implements AuditRepository {
         try (Connection connection = DriverManager.getConnection(property.getUrl(),
                 property.getUsername(), property.getPassword())) {
             PreparedStatement statement = connection
-                    .prepareStatement("SELECT * FROM company.audit_liquibase;");
+                    .prepareStatement("SELECT * FROM audit_liquibase;");
             ResultSet resultSet = statement.executeQuery();
 
             audits = new ArrayList<>();

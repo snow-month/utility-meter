@@ -28,7 +28,7 @@ public class UserRepositoryImpl implements UserRepository {
         try (Connection connection = DriverManager.getConnection(property.getUrl(),
                 property.getUsername(), property.getPassword())) {
             PreparedStatement statement = connection
-                    .prepareStatement("SELECT * FROM company.user_liquibase WHERE login = ?");
+                    .prepareStatement("SELECT * FROM user_liquibase WHERE login = ?");
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -50,7 +50,7 @@ public class UserRepositoryImpl implements UserRepository {
         try (Connection connection = DriverManager.getConnection(property.getUrl(),
                 property.getUsername(), property.getPassword())) {
             PreparedStatement statement = connection
-                    .prepareStatement("INSERT INTO company.user_liquibase (login, password, role)" +
+                    .prepareStatement("INSERT INTO user_liquibase (login, password, role)" +
                             " VALUES (? ,? ,?)");
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
