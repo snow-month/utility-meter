@@ -31,8 +31,8 @@ public class Main {
     public static void main(String[] args) {
         PropertiesApp propApp = new PropertiesApp();
         MigrationService migrationService = new MigrationService();
-        migrationService.init(propApp.getUrl(), propApp.getUsername(),
-                propApp.getPassword(), "db/changelog/changelog.xml");
+        migrationService.init(propApp.getUrl(), propApp.getUsername(), propApp.getPassword(),
+                "db/changelog/changelog.xml", propApp.getDefaultSchemaName());
 
         // задержка для создания таблиц
         try {

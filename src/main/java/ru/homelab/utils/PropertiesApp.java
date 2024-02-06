@@ -11,6 +11,7 @@ public class PropertiesApp {
     private final String url;
     private final String username;
     private String password;
+    private String defaultSchemaName;
 
     /**
      * Instantiates a new Properties app.
@@ -28,6 +29,7 @@ public class PropertiesApp {
         this.url = prop.getProperty("jdbc.url");
         this.username = prop.getProperty("jdbc.username");
         this.password = prop.getProperty("jdbc.password");
+        this.defaultSchemaName = prop.getProperty("liquibase.defaultschemaname");
     }
 
     public PropertiesApp(String url, String username, String password) {
@@ -65,5 +67,9 @@ public class PropertiesApp {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getDefaultSchemaName() {
+        return defaultSchemaName;
     }
 }

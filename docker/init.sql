@@ -4,3 +4,5 @@ GRANT ALL PRIVILEGES ON DATABASE ppdb TO pp;
 \connect ppdb;
 CREATE SCHEMA company;
 GRANT ALL PRIVILEGES ON SCHEMA company TO pp;
+CREATE SCHEMA service_liquibase;
+GRANT ALL PRIVILEGES ON SCHEMA service_liquibase TO pp;
