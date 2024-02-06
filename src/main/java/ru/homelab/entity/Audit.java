@@ -8,9 +8,9 @@ package ru.homelab.entity;
  */
 public final class Audit {
     private Long id;
-    private String date;
-    private String messageAudit;
-    private Long userId;
+    private final String date;
+    private final String messageAudit;
+    private final Long userId;
 
     /**
      * Instantiates a new Audit.

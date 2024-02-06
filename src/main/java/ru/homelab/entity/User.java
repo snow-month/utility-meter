@@ -10,17 +10,11 @@ package ru.homelab.entity;
  */
 public class User {
     private Long id;
-    private String login;
-    private String password;
-    private String role;
+    private final String login;
+    private final String password;
+    private final String role;
     // todo
 //    private List<Role> roles;
-
-    /**
-     * Instantiates a new User.
-     */
-    public User() {
-    }
 
     /**
      * Instantiates a new User.
