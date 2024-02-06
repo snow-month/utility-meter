@@ -5,7 +5,7 @@
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <changeSet id="001-create-table-user" author="homelab">
-        <createTable tableName="user_liquibase" schemaName="">
+        <createTable tableName="user_liquibase" schemaName="company">
             <column name="id" autoIncrement="true" type="SERIAL">
                 <constraints primaryKey="true" nullable="false"/>
             </column>

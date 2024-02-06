@@ -5,7 +5,7 @@
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <changeSet id="003-create-table-water-cold" author="homelab">
-        <createTable tableName="water_cold_liquibase" schemaName="">
+        <createTable tableName="water_cold_liquibase" schemaName="company">
             <column name="id" autoIncrement="true" type="SERIAL">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
