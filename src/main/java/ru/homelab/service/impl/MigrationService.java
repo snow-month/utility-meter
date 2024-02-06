@@ -22,11 +22,11 @@ public class MigrationService {
      * @param username the username
      * @param password the password
      */
-    public void init(String url, String username, String password) {
+    public void init(String url, String username, String password, String changelog) {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             Database database = DatabaseFactory.getInstance()
                     .findCorrectDatabaseImplementation(new JdbcConnection(connection));
-            Liquibase liquibase = new Liquibase("db/changelog/changelog.xml",
+            Liquibase liquibase = new Liquibase(changelog,
                     new ClassLoaderResourceAccessor(), database);
             liquibase.update();
             System.out.println("Migration is completed successfully");

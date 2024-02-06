@@ -10,7 +10,6 @@ import ru.homelab.in.InputConsole;
 import ru.homelab.out.Menu;
 import ru.homelab.repository.*;
 import ru.homelab.repository.impl.*;
-import ru.homelab.service.impl.AuthorizationService;
 import ru.homelab.service.*;
 import ru.homelab.service.impl.*;
 import ru.homelab.utils.PropertiesApp;
@@ -32,7 +31,8 @@ public class Main {
     public static void main(String[] args) {
         PropertiesApp propApp = new PropertiesApp();
         MigrationService migrationService = new MigrationService();
-        migrationService.init(propApp.getUrl(), propApp.getUsername(), propApp.getPassword());
+        migrationService.init(propApp.getUrl(), propApp.getUsername(),
+                propApp.getPassword(), "db/changelog/changelog.xml");
 
         // задержка для создания таблиц
         try {
