@@ -16,7 +16,7 @@ ___
 2.1. Переходим в корневую папку проекта и в консоли запускаем команду
 
 ```
-user@pc:~/IdeaProjects/utility-meter$ docker-compose up -d
+user@pc:~/IdeaProjects/utility-meter$ docker compose up -d
 ```
 2.2. Запускаем 
 
