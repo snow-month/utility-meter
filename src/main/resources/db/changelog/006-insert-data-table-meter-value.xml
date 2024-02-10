@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="006-insert-data-table-meter-value" author="homelab">
+        <insert tableName="meter_value_liquibase" schemaName="company">
+            <column name="value" valueNumeric="22"/>
+            <column name="year" valueNumeric="2023"/>
+            <column name="month" valueNumeric="2"/>
+            <column name="meter_type_id" valueNumeric="1"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="meter_value_liquibase" schemaName="company">
+            <column name="value" valueNumeric="42"/>
+            <column name="year" valueNumeric="2023"/>
+            <column name="month" valueNumeric="4"/>
+            <column name="meter_type_id" valueNumeric="1"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="meter_value_liquibase" schemaName="company">
+            <column name="value" valueNumeric="67"/>
+            <column name="year" valueNumeric="2023"/>
+            <column name="month" valueNumeric="6"/>
+            <column name="meter_type_id" valueNumeric="1"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="meter_value_liquibase" schemaName="company">
+            <column name="value" valueNumeric="122"/>
+            <column name="year" valueNumeric="2023"/>
+            <column name="month" valueNumeric="11"/>
+            <column name="meter_type_id" valueNumeric="1"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

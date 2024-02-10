@@ -5,12 +5,10 @@
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <include file="001-create-table-user.xml" relativeToChangelogFile="true"/>
-    <include file="002-create-table-heat.xml" relativeToChangelogFile="true"/>
-    <include file="003-create-table-water-cold.xml" relativeToChangelogFile="true"/>
-    <include file="004-create-table-water-hot.xml" relativeToChangelogFile="true"/>
-    <include file="005-insert-data-table-user.xml" relativeToChangelogFile="true"/>
-    <include file="006-insert-data-table-heat.xml" relativeToChangelogFile="true"/>
+    <include file="002-create-table-meter-type.xml" relativeToChangelogFile="true"/>
+    <include file="003-create-table-meter-value.xml" relativeToChangelogFile="true"/>
+    <include file="004-insert-data-table-user.xml" relativeToChangelogFile="true"/>
+    <include file="005-insert-data-table-meter-type.xml" relativeToChangelogFile="true"/>
+    <include file="006-insert-data-table-meter-value.xml" relativeToChangelogFile="true"/>
     <include file="007-create-table-audit.xml" relativeToChangelogFile="true"/>
-    <include file="008-insert-data-table-water-cold.xml" relativeToChangelogFile="true"/>
-    <include file="009-insert-data-table-water-hot.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
