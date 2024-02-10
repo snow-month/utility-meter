@@ -1,7 +1,10 @@
 package ru.homelab;
 
+import ru.homelab.entity.User;
+import ru.homelab.repository.impl.UserRepositoryImpl;
+import ru.homelab.service.impl.DBConnectionProviderImpl;
 import ru.homelab.service.impl.MigrationService;
-import ru.homelab.utils.PropertiesApp;
+import ru.homelab.service.impl.PropertiesService;
 // todo многопоточность, чтобы много пользователей одновременно
 // todo commit transactional
 
@@ -18,15 +21,21 @@ public class Main {
      * @param args the input arguments
      */
     public static void main(String[] args) {
-        PropertiesApp propApp = new PropertiesApp();
-        MigrationService migrationService = new MigrationService();
-        migrationService.init(propApp.getUrl(), propApp.getUsername(), propApp.getPassword(),
-                "db/changelog/changelog.xml", propApp.getDefaultSchemaName());
+        new MigrationService().init(
+                PropertiesService.get("db.url"),
+                PropertiesService.get("db.username"),
+                PropertiesService.get("db.password"),
+                "db/changelog/changelog.xml",
+                PropertiesService.get("liquibase.defaultSchemaName")
+        );
 
         // задержка для создания таблиц
         try {
             Thread.sleep(4000);
         } catch (InterruptedException e) {
         }
+
+        User user = new User("www", "223322", "TT");
+        new UserRepositoryImpl(new DBConnectionProviderImpl()).save(user);
     }
 }

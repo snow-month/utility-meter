@@ -1,24 +1,34 @@
 package ru.homelab.repository.impl;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.homelab.entity.Audit;
 import ru.homelab.entity.MessageAudit;
 import ru.homelab.repository.AuditRepository;
 import ru.homelab.repository.CreateContainerAndRunMigration;
-import ru.homelab.utils.PropertiesApp;
+import ru.homelab.service.DBConnectionProvider;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AuditRepositoryImplTest extends CreateContainerAndRunMigration {
-    private final PropertiesApp propertiesApp = new PropertiesApp(
-            CreateContainerAndRunMigration.url,
-            CreateContainerAndRunMigration.username,
-            CreateContainerAndRunMigration.password
-    );
-    private final AuditRepository auditRepository = new AuditRepositoryImpl(propertiesApp);
+    private AuditRepository auditRepository;
+
+    @BeforeEach
+    void setUp() {
+        DBConnectionProvider dbConnectionProvider = new DBConnectionProvider() {
+            @Override
+            public Connection getConnection() throws SQLException {
+                return DriverManager.getConnection(url, username, password);
+            }
+        };
+        this.auditRepository = new AuditRepositoryImpl(dbConnectionProvider);
+    }
 
     @Test
     void getAll() {

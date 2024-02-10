@@ -18,8 +18,12 @@ public class CreateContainerAndRunMigration {
         url = postgres.getJdbcUrl();
         username = postgres.getUsername();
         password = postgres.getPassword();
-        new MigrationService().init(url, username, password,
-                "dbtest/changelog/changelog.xml", "public");
+        new MigrationService().init(
+                url,
+                username,
+                password,
+                "dbtest/changelog/changelog.xml",
+                "public");
     }
 
     @AfterAll

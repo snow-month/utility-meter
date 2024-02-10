@@ -1,25 +1,35 @@
 package ru.homelab.repository.impl;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.homelab.entity.MeterValue;
 import ru.homelab.exception.NoValueException;
 import ru.homelab.exception.ValueAlreadyExistsException;
 import ru.homelab.repository.CreateContainerAndRunMigration;
 import ru.homelab.repository.MeterValueRepository;
-import ru.homelab.utils.PropertiesApp;
+import ru.homelab.service.DBConnectionProvider;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MeterValueRepositoryImplTest extends CreateContainerAndRunMigration {
-    private final PropertiesApp propertiesApp = new PropertiesApp(
-            CreateContainerAndRunMigration.url,
-            CreateContainerAndRunMigration.username,
-            CreateContainerAndRunMigration.password
-    );
-    private final MeterValueRepository meterValueRepository = new MeterValueRepositoryImpl(propertiesApp);
+    private MeterValueRepository meterValueRepository;
+
+    @BeforeEach
+    void setUp() {
+        DBConnectionProvider dbConnectionProvider = new DBConnectionProvider() {
+            @Override
+            public Connection getConnection() throws SQLException {
+                return DriverManager.getConnection(url, username, password);
+            }
+        };
+        this.meterValueRepository = new MeterValueRepositoryImpl(dbConnectionProvider);
+    }
 
     @Test
     void currentValue() throws NoValueException {

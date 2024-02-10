@@ -2,31 +2,25 @@ package ru.homelab.repository.impl;
 
 import ru.homelab.entity.Audit;
 import ru.homelab.repository.AuditRepository;
-import ru.homelab.utils.PropertiesApp;
+import ru.homelab.service.DBConnectionProvider;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The type Audit repository.
- */
 public class AuditRepositoryImpl implements AuditRepository {
-    private final PropertiesApp property;
+    private final DBConnectionProvider dbConnectionProvider;
 
-    /**
-     * Instantiates a new Audit repository.
-     *
-     * @param property the property
-     */
-    public AuditRepositoryImpl(PropertiesApp property) {
-        this.property = property;
+    public AuditRepositoryImpl(DBConnectionProvider dbConnectionProvider) {
+        this.dbConnectionProvider = dbConnectionProvider;
     }
 
     @Override
     public void save(Audit audit) {
-        try (Connection connection = DriverManager.getConnection(property.getUrl(),
-                property.getUsername(), property.getPassword())) {
+        try (Connection connection = dbConnectionProvider.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO audit_liquibase" +
                     " (date, message_audit, user_id) VALUES (?,?,?);");
             statement.setString(1, audit.getDate());
@@ -41,8 +35,7 @@ public class AuditRepositoryImpl implements AuditRepository {
     @Override
     public List<Audit> getAll() {
         List<Audit> audits = null;
-        try (Connection connection = DriverManager.getConnection(property.getUrl(),
-                property.getUsername(), property.getPassword())) {
+        try (Connection connection = dbConnectionProvider.getConnection()) {
             PreparedStatement statement = connection
                     .prepareStatement("SELECT * FROM audit_liquibase;");
             ResultSet resultSet = statement.executeQuery();

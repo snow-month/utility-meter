@@ -4,23 +4,25 @@ import ru.homelab.entity.MeterValue;
 import ru.homelab.exception.NoValueException;
 import ru.homelab.exception.ValueAlreadyExistsException;
 import ru.homelab.repository.MeterValueRepository;
-import ru.homelab.utils.PropertiesApp;
+import ru.homelab.service.DBConnectionProvider;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MeterValueRepositoryImpl implements MeterValueRepository {
-    private final PropertiesApp property;
+    private final DBConnectionProvider dbConnectionProvider;
 
-    public MeterValueRepositoryImpl(PropertiesApp property) {
-        this.property = property;
+    public MeterValueRepositoryImpl(DBConnectionProvider dbConnectionProvider) {
+        this.dbConnectionProvider = dbConnectionProvider;
     }
 
     public Integer currentValue(long userId) throws NoValueException {
         Integer currentValue = null;
-        try (Connection connection = DriverManager.getConnection(property.getUrl(),
-                property.getUsername(), property.getPassword())) {
+        try (Connection connection = dbConnectionProvider.getConnection()) {
             PreparedStatement statement = connection
                     .prepareStatement("SELECT value FROM meter_value_liquibase WHERE user_id = ?" +
                             " order by year DESC, month DESC limit 1");
@@ -41,8 +43,7 @@ public class MeterValueRepositoryImpl implements MeterValueRepository {
     @Override
     public Integer valueForMonth(int year, int month, long userId) throws NoValueException {
         Integer valueForMonth = null;
-        try (Connection connection = DriverManager.getConnection(property.getUrl(),
-                property.getUsername(), property.getPassword())) {
+        try (Connection connection = dbConnectionProvider.getConnection()) {
             PreparedStatement statement = connection
                     .prepareStatement("SELECT value FROM meter_value_liquibase WHERE " +
                             "year = ? and month = ? and user_id = ?");
@@ -64,8 +65,7 @@ public class MeterValueRepositoryImpl implements MeterValueRepository {
 
     @Override
     public boolean addValue(int value, int year, int month, long meterTypeId, long userId) throws ValueAlreadyExistsException {
-        try (Connection connection = DriverManager.getConnection(property.getUrl(),
-                property.getUsername(), property.getPassword())) {
+        try (Connection connection = dbConnectionProvider.getConnection()) {
             try {
                 valueForMonth(year, month, userId);
                 throw new ValueAlreadyExistsException("Value already exists");
@@ -91,8 +91,7 @@ public class MeterValueRepositoryImpl implements MeterValueRepository {
     public List<MeterValue> allValuesUser(Long userId) {
         List<MeterValue> meterValues = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection(property.getUrl(),
-                property.getUsername(), property.getPassword())) {
+        try (Connection connection = dbConnectionProvider.getConnection()) {
             PreparedStatement statement = connection
                     .prepareStatement("SELECT * FROM meter_value_liquibase WHERE user_id = ? " +
                             "order by year DESC, month DESC");
@@ -113,8 +112,7 @@ public class MeterValueRepositoryImpl implements MeterValueRepository {
     public List<MeterValue> allValue() {
         List<MeterValue> meterValues = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection(property.getUrl(),
-                property.getUsername(), property.getPassword())) {
+        try (Connection connection = dbConnectionProvider.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(
                     "SELECT * FROM meter_value_liquibase;");
             ResultSet resultSet = statement.executeQuery();

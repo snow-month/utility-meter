@@ -1,6 +1,7 @@
 package ru.homelab.repository.impl;
 
 import org.junit.Rule;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
 import ru.homelab.entity.Role;
@@ -8,19 +9,29 @@ import ru.homelab.entity.User;
 import ru.homelab.exception.NoUserException;
 import ru.homelab.repository.CreateContainerAndRunMigration;
 import ru.homelab.repository.UserRepository;
-import ru.homelab.utils.PropertiesApp;
+import ru.homelab.service.DBConnectionProvider;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class UserRepositoryImplTest extends CreateContainerAndRunMigration {
-    private final PropertiesApp propertiesApp = new PropertiesApp(
-            CreateContainerAndRunMigration.url,
-            CreateContainerAndRunMigration.username,
-            CreateContainerAndRunMigration.password
-    );
+    private UserRepository userRepository;
 
-    private final UserRepository userRepository = new UserRepositoryImpl(propertiesApp);
+    @BeforeEach
+    void setUp() {
+        DBConnectionProvider dbConnectionProvider = new DBConnectionProvider() {
+            @Override
+            public Connection getConnection() throws SQLException {
+                return DriverManager.getConnection(url, username, password);
+            }
+        };
+        this.userRepository = new UserRepositoryImpl(dbConnectionProvider);
+    }
+
     @Rule
     public final ExpectedException exception = ExpectedException.none();
 
