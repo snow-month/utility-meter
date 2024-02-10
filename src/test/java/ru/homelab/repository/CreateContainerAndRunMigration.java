@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.testcontainers.containers.PostgreSQLContainer;
 import ru.homelab.service.impl.MigrationService;
 
-public class CreateContainerAndRunMigration {
+public abstract class CreateContainerAndRunMigration {
     protected static String url;
     protected static String username;
     protected static String password;
