@@ -1,5 +1,8 @@
 package ru.homelab.entity;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 /**
  * Enum для ролей безопасности.
  *
@@ -14,5 +17,11 @@ public enum Role {
     /**
      * Admin role.
      */
-    ADMIN
+    ADMIN;
+
+    public static Optional<Role> find(String role) {
+        return Arrays.stream(values())
+                .filter(it -> it.name().equals(role))
+                .findFirst();
+    }
 }

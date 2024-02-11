@@ -50,8 +50,8 @@ class UserRepositoryImplTest extends CreateContainerAndRunMigration {
     }
 
     @Test
-    void save() throws NoUserException {
-        User newuser = new User("newuser", "1123", Role.USER.toString());
+    void save() throws NoUserException, SQLException {
+        User newuser = new User("newuser", "1123", Role.USER);
         userRepository.save(newuser);
         User user = userRepository.getUserByLogin(newuser.getLogin());
         assertEquals(newuser.getLogin(), user.getLogin());

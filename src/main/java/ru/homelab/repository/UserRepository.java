@@ -3,6 +3,8 @@ package ru.homelab.repository;
 import ru.homelab.entity.User;
 import ru.homelab.exception.NoUserException;
 
+import java.sql.SQLException;
+
 /**
  * The interface User repository.
  */
@@ -20,6 +22,7 @@ public interface UserRepository {
      * Save.
      *
      * @param user the user
+     * @return
      */
-    void save(User user);
+    User save(User user) throws SQLException;
 }

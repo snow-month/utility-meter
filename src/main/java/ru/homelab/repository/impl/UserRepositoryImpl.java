@@ -1,14 +1,12 @@
 package ru.homelab.repository.impl;
 
+import ru.homelab.entity.Role;
 import ru.homelab.entity.User;
 import ru.homelab.exception.NoUserException;
 import ru.homelab.repository.UserRepository;
 import ru.homelab.service.DBConnectionProvider;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class UserRepositoryImpl implements UserRepository {
     private final DBConnectionProvider dbConnectionProvider;
@@ -29,7 +27,7 @@ public class UserRepositoryImpl implements UserRepository {
                 user = new User(resultSet.getLong("id"),
                         resultSet.getString("login"),
                         resultSet.getString("password"),
-                        resultSet.getString("role"));
+                        Role.valueOf(resultSet.getString("role")));
             } else {
                 throw new NoUserException("нет пользователя с логином - " + login);
             }
@@ -40,17 +38,22 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void save(User user) {
+    public User save(User user) throws SQLException {
         try (Connection connection = dbConnectionProvider.getConnection()) {
             PreparedStatement statement = connection
                     .prepareStatement("INSERT INTO user_liquibase (login, password, role)" +
-                            " VALUES (? ,? ,?)");
+                            " VALUES (? ,? ,?)", Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
-            statement.setString(3, user.getRole());
+            statement.setString(3, user.getRole().name());
+
             statement.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println("sql exception, save(): " + e.getMessage());
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            generatedKeys.next();
+            Long id = Long.valueOf(generatedKeys.getString("id"));
+            user.setId(id);
+
+            return user;
         }
     }
 }
