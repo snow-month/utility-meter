@@ -1,16 +1,25 @@
 plugins {
     id 'java'
+    id 'war'
 }
 
-group = 'ru.homelab'
-version = '1.0-SNAPSHOT'
+group 'ru.homelab'
+version '1.0'
+//war.setArchiveBaseName("ROOT")
 
 repositories {
     mavenCentral()
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 dependencies {
-    implementation('org.postgresql:postgresql:42.3.8')
+    compileOnly('jakarta.servlet:jakarta.servlet-api:6.0.0')
+    implementation('com.fasterxml.jackson.core:jackson-databind:2.13.5')
+
+    implementation('org.postgresql:postgresql:42.6.0')
     implementation('org.liquibase:liquibase-core:4.23.0')
     implementation('com.mchange:c3p0:0.9.5.4')
     testImplementation platform('org.junit:junit-bom:5.9.2')
@@ -23,5 +32,3 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-
-// todo заменить на 7.3?
