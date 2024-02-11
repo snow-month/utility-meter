@@ -8,17 +8,33 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DBConnectionProviderImpl implements DBConnectionProvider {
+    private static final String DRIVER_KEY = "db.driver";
+    private static final String URL_KEY = "db.url";
+    private static final String USERNAME_KEY = "db.username";
+    private static final String PASSWORD_KEY = "db.password";
     private final ComboPooledDataSource cpds;
+
+    static {
+        loadDriver();
+    }
+
+    private static void loadDriver() {
+        try {
+            Class.forName(PropertiesService.get(DRIVER_KEY));
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("sql exception, load driver Postgresql: " + e.getMessage());
+        }
+    }
 
     public DBConnectionProviderImpl() {
         this.cpds = new ComboPooledDataSource();
         try {
-            cpds.setDriverClass(PropertiesService.get("db.driver"));
-            cpds.setJdbcUrl(PropertiesService.get("db.url"));
-            cpds.setUser(PropertiesService.get("db.username"));
-            cpds.setPassword(PropertiesService.get("db.password"));
+            cpds.setDriverClass(PropertiesService.get(DRIVER_KEY));
+            cpds.setJdbcUrl(PropertiesService.get(URL_KEY));
+            cpds.setUser(PropertiesService.get(USERNAME_KEY));
+            cpds.setPassword(PropertiesService.get(PASSWORD_KEY));
         } catch (PropertyVetoException e) {
-            System.out.println("sql exception, load driver Postgresql: " + e.getMessage());
+            throw new RuntimeException("sql exception, load driver Postgresql: " + e.getMessage());
         }
     }
 
