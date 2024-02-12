@@ -1,7 +1,5 @@
 package ru.homelab.entity;
 
-// todo отдельная схема
-
 public class User {
     private Long id;
     private String login;
