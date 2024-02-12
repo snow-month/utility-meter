@@ -33,5 +33,33 @@
             <column name="meter_type_id" valueNumeric="1"/>
             <column name="user_id" valueNumeric="1"/>
         </insert>
+        <insert tableName="meter_value_liquibase" schemaName="company">
+            <column name="value" valueNumeric="12"/>
+            <column name="year" valueNumeric="2023"/>
+            <column name="month" valueNumeric="1"/>
+            <column name="meter_type_id" valueNumeric="2"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="meter_value_liquibase" schemaName="company">
+            <column name="value" valueNumeric="140"/>
+            <column name="year" valueNumeric="2023"/>
+            <column name="month" valueNumeric="7"/>
+            <column name="meter_type_id" valueNumeric="2"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="meter_value_liquibase" schemaName="company">
+            <column name="value" valueNumeric="147"/>
+            <column name="year" valueNumeric="2024"/>
+            <column name="month" valueNumeric="1"/>
+            <column name="meter_type_id" valueNumeric="1"/>
+            <column name="user_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="meter_value_liquibase" schemaName="company">
+            <column name="value" valueNumeric="147"/>
+            <column name="year" valueNumeric="2024"/>
+            <column name="month" valueNumeric="1"/>
+            <column name="meter_type_id" valueNumeric="1"/>
+            <column name="user_id" valueNumeric="2"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>

@@ -6,13 +6,13 @@
 
     <changeSet id="005-insert-data-table-meter-type" author="homelab">
         <insert tableName="meter_type_liquibase" schemaName="company">
-            <column name="type" value="heating"/>
+            <column name="type" value="HEATING"/>
         </insert>
         <insert tableName="meter_type_liquibase" schemaName="company">
-            <column name="type" value="water_cold"/>
+            <column name="type" value="WATER_COLD"/>
         </insert>
         <insert tableName="meter_type_liquibase" schemaName="company">
-            <column name="type" value="water_hot"/>
+            <column name="type" value="WATER_HOT"/>
         </insert>
     </changeSet>
 </databaseChangeLog>
