@@ -10,3 +10,12 @@ services:
       - ./docker/db/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - '5432:5432'
+
+  web:
+    depends_on:
+      - db-postgresql
+    image: tomcat
+    volumes:
+      - ./build/libs/utility-meter-1.0-SNAPSHOT.war:/usr/local/tomcat/webapps/ROOT.war
+    ports:
+      - '8080:8080'
