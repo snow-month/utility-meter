@@ -1,11 +1,14 @@
 package ru.homelab.entity;
 
-// todo вторичный ключ
+import java.util.Objects;
+
+
 public class MeterValue {
     private Long id;
     private Integer value;
     private Integer year;
     private Integer month;
+    // todo добавить вторичный ключ
     private Long meterTypeId;
     private Long userId;
 
@@ -64,5 +67,18 @@ public class MeterValue {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MeterValue that = (MeterValue) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

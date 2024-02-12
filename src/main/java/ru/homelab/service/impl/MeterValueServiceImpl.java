@@ -1,11 +1,10 @@
 package ru.homelab.service.impl;
 
-import ru.homelab.entity.MessageAudit;
-import ru.homelab.entity.MeterValue;
+import ru.homelab.dto.MeterValueDto;
+import ru.homelab.entity.MeterTypeName;
 import ru.homelab.exception.NoValueException;
 import ru.homelab.exception.ValueAlreadyExistsException;
 import ru.homelab.repository.MeterValueRepository;
-import ru.homelab.service.AuditService;
 import ru.homelab.service.MeterValueService;
 
 import java.util.Calendar;
@@ -13,43 +12,43 @@ import java.util.List;
 
 public class MeterValueServiceImpl implements MeterValueService {
     private final MeterValueRepository meterValueRepository;
-    private final AuditService auditService;
 
-    public MeterValueServiceImpl(MeterValueRepository meterValueRepository, AuditService auditService) {
+    public MeterValueServiceImpl(MeterValueRepository meterValueRepository) {
         this.meterValueRepository = meterValueRepository;
-        this.auditService = auditService;
     }
 
     @Override
-    public Integer currentValue() throws NoValueException {
-        auditService.save(MessageAudit.VIEW_CURRENT_READINGS);
+    public Integer currentValue(MeterTypeName name) throws NoValueException {
         long userId = currentUserId();
-        return meterValueRepository.currentValue(userId);
+        return meterValueRepository.currentValue(userId, name);
     }
 
     @Override
-    public boolean addValue(int value, long meterTypeId) throws ValueAlreadyExistsException {
-        auditService.save(MessageAudit.ADD_VALUE);
+    public boolean addValue(int value, MeterTypeName meterTypeName) throws ValueAlreadyExistsException {
         return meterValueRepository
-                .addValue(value, currentYear(), currentMonth(), meterTypeId, currentUserId());
+                .addValue(value, currentYear(), currentMonth(), meterTypeName, currentUserId());
     }
 
     @Override
-    public Integer valueForMonth(int year, int month, long userId) throws NoValueException {
-        auditService.save(MessageAudit.VIEWING_READINGS_FOR_THE_MONTH);
-        return meterValueRepository.valueForMonth(year, month, userId);
+    public Integer valueForMonth(int year, int month, MeterTypeName meterTypeName) throws NoValueException {
+        return meterValueRepository.valueForMonth(year, month, meterTypeName, currentUserId());
     }
 
     @Override
-    public List<MeterValue> allValuesUser() {
-        auditService.save(MessageAudit.GETTING_HISTORY_OF_GIVING_TESTIMONY);
-        return meterValueRepository.allValuesUser(currentUserId());
+    public List<MeterValueDto> allValuesUser(MeterTypeName meterTypeName) {
+        return meterValueRepository.allValuesUser(currentUserId(), meterTypeName).stream()
+                .map(meterValue -> new MeterValueDto(
+                        meterValue.getValue(),
+                        meterValue.getYear(),
+                        meterValue.getMonth()
+                ))
+                .toList();
     }
 
     @Override
-    public List<MeterValue> allValue() {
-        auditService.save(MessageAudit.GETTING_HISTORY_OF_GIVING_TESTIMONY);
-        return meterValueRepository.allValue();
+    public List<MeterValueDto> allValue() {
+//        return meterValueRepository.allValue();
+        return null;
     }
 
     private int currentYear() {
@@ -61,6 +60,7 @@ public class MeterValueServiceImpl implements MeterValueService {
     }
 
     private static Long currentUserId() {
-        return AuthorizationService.CURRENT_USER.get().getId();
+//        return AuthorizationService.CURRENT_USER.get().getId();
+        return 1L;
     }
 }
