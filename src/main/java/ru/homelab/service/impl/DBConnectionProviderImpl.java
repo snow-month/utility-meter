@@ -18,12 +18,13 @@ public class DBConnectionProviderImpl implements DBConnectionProvider {
         loadDriver();
     }
 
+    // todo не грузит драйвер
     private static void loadDriver() {
-        try {
-            Class.forName(PropertiesService.get(DRIVER_KEY));
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException("sql exception, load driver Postgresql: " + e.getMessage());
-        }
+//        try {
+//            Class.forName(PropertiesService.get(DRIVER_KEY));
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException("sql exception, load driver Postgresql: " + e.getMessage());
+//        }
     }
 
     public DBConnectionProviderImpl() {
