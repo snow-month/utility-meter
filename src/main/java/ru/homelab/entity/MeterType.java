@@ -2,9 +2,13 @@ package ru.homelab.entity;
 
 public class MeterType {
     private Long id;
-    private String type;
+    private MeterTypeName type;
 
-    public MeterType(Long id, String type) {
+    public MeterType(MeterTypeName type) {
+        this.type = type;
+    }
+
+    public MeterType(Long id, MeterTypeName type) {
         this.id = id;
         this.type = type;
     }
@@ -17,11 +21,11 @@ public class MeterType {
         this.id = id;
     }
 
-    public String getType() {
+    public MeterTypeName getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(MeterTypeName type) {
         this.type = type;
     }
 }

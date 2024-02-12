@@ -1,6 +1,6 @@
 package ru.homelab.service.impl;
 
-import ru.homelab.entity.MeterType;
+import ru.homelab.entity.MeterTypeName;
 import ru.homelab.repository.MeterTypeRepository;
 import ru.homelab.service.MeterTypeService;
 
@@ -12,7 +12,7 @@ public class MeterTypeServiceImpl implements MeterTypeService {
     }
 
     @Override
-    public void save(MeterType meterType) {
-
+    public void save(MeterTypeName meterTypeName) {
+        repository.save(meterTypeName);
     }
 }

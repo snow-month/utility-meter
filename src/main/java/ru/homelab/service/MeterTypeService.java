@@ -1,7 +1,7 @@
 package ru.homelab.service;
 
-import ru.homelab.entity.MeterType;
+import ru.homelab.entity.MeterTypeName;
 
 public interface MeterTypeService {
-    void save(MeterType meterType);
+    void save(MeterTypeName meterTypeName);
 }
