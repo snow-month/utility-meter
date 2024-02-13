@@ -8,6 +8,9 @@ public class User {
     // todo
 //    private List<Role> roles;
 
+    public User() {
+    }
+
     public User(String login, String password, Role role) {
         this.login = login;
         this.password = password;

@@ -1,11 +1,11 @@
 package ru.homelab.validator;
 
-import ru.homelab.dto.CreateUserDto;
+import ru.homelab.dto.UserDto;
 import ru.homelab.entity.Role;
 
-public class CreateUserValidator implements Validator<CreateUserDto> {
+public class CreateUserValidator implements Validator<UserDto> {
     @Override
-    public ValidationResult isValid(CreateUserDto object) {
+    public ValidationResult isValid(UserDto object) {
         var validationResult = new ValidationResult();
         if (object.getLogin().isEmpty()) {
             validationResult.add(new Error("invalid.login", "Логин пустой"));

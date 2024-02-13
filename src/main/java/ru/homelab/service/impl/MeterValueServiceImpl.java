@@ -4,6 +4,7 @@ import ru.homelab.dto.MeterValueDto;
 import ru.homelab.entity.MeterTypeName;
 import ru.homelab.exception.NoValueException;
 import ru.homelab.exception.ValueAlreadyExistsException;
+import ru.homelab.mapper.MeterValueMapper;
 import ru.homelab.repository.MeterValueRepository;
 import ru.homelab.service.MeterValueService;
 
@@ -37,11 +38,7 @@ public class MeterValueServiceImpl implements MeterValueService {
     @Override
     public List<MeterValueDto> allValuesUser(MeterTypeName meterTypeName) {
         return meterValueRepository.allValuesUser(currentUserId(), meterTypeName).stream()
-                .map(meterValue -> new MeterValueDto(
-                        meterValue.getValue(),
-                        meterValue.getYear(),
-                        meterValue.getMonth()
-                ))
+                .map(MeterValueMapper.INSTANCE::materValueToMeterValueDto)
                 .toList();
     }
 
@@ -61,6 +58,6 @@ public class MeterValueServiceImpl implements MeterValueService {
 
     private static Long currentUserId() {
 //        return AuthorizationService.CURRENT_USER.get().getId();
-        return 1L;
+        return 20L;
     }
 }

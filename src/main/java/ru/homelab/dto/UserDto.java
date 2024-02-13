@@ -1,11 +1,11 @@
 package ru.homelab.dto;
 
-public class CreateUserDto {
+public class UserDto {
     private String login;
     private String password;
     private String role;
 
-    public CreateUserDto(String login, String password, String role) {
+    public UserDto(String login, String password, String role) {
         this.login = login;
         this.password = password;
         this.role = role;
