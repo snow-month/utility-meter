@@ -9,57 +9,57 @@
             <column name="value" valueNumeric="22"/>
             <column name="year" valueNumeric="2023"/>
             <column name="month" valueNumeric="2"/>
-            <column name="meter_type_id" valueNumeric="1"/>
-            <column name="user_id" valueNumeric="1"/>
+            <column name="meter_type_id" valueNumeric="20"/>
+            <column name="user_id" valueNumeric="20"/>
         </insert>
         <insert tableName="meter_value_liquibase" schemaName="">
             <column name="value" valueNumeric="42"/>
             <column name="year" valueNumeric="2023"/>
             <column name="month" valueNumeric="4"/>
-            <column name="meter_type_id" valueNumeric="1"/>
-            <column name="user_id" valueNumeric="1"/>
+            <column name="meter_type_id" valueNumeric="20"/>
+            <column name="user_id" valueNumeric="20"/>
         </insert>
         <insert tableName="meter_value_liquibase" schemaName="">
             <column name="value" valueNumeric="67"/>
             <column name="year" valueNumeric="2023"/>
             <column name="month" valueNumeric="6"/>
-            <column name="meter_type_id" valueNumeric="1"/>
-            <column name="user_id" valueNumeric="1"/>
+            <column name="meter_type_id" valueNumeric="20"/>
+            <column name="user_id" valueNumeric="20"/>
         </insert>
         <insert tableName="meter_value_liquibase" schemaName="">
             <column name="value" valueNumeric="122"/>
             <column name="year" valueNumeric="2023"/>
             <column name="month" valueNumeric="11"/>
-            <column name="meter_type_id" valueNumeric="1"/>
-            <column name="user_id" valueNumeric="1"/>
+            <column name="meter_type_id" valueNumeric="20"/>
+            <column name="user_id" valueNumeric="20"/>
         </insert>
         <insert tableName="meter_value_liquibase" schemaName="">
             <column name="value" valueNumeric="12"/>
             <column name="year" valueNumeric="2023"/>
             <column name="month" valueNumeric="1"/>
-            <column name="meter_type_id" valueNumeric="2"/>
-            <column name="user_id" valueNumeric="1"/>
+            <column name="meter_type_id" valueNumeric="25"/>
+            <column name="user_id" valueNumeric="20"/>
         </insert>
         <insert tableName="meter_value_liquibase" schemaName="">
             <column name="value" valueNumeric="140"/>
             <column name="year" valueNumeric="2023"/>
             <column name="month" valueNumeric="7"/>
-            <column name="meter_type_id" valueNumeric="2"/>
-            <column name="user_id" valueNumeric="1"/>
+            <column name="meter_type_id" valueNumeric="25"/>
+            <column name="user_id" valueNumeric="20"/>
         </insert>
         <insert tableName="meter_value_liquibase" schemaName="">
             <column name="value" valueNumeric="147"/>
             <column name="year" valueNumeric="2024"/>
             <column name="month" valueNumeric="1"/>
-            <column name="meter_type_id" valueNumeric="1"/>
-            <column name="user_id" valueNumeric="1"/>
+            <column name="meter_type_id" valueNumeric="20"/>
+            <column name="user_id" valueNumeric="20"/>
         </insert>
         <insert tableName="meter_value_liquibase" schemaName="">
             <column name="value" valueNumeric="147"/>
             <column name="year" valueNumeric="2024"/>
             <column name="month" valueNumeric="1"/>
-            <column name="meter_type_id" valueNumeric="1"/>
-            <column name="user_id" valueNumeric="2"/>
+            <column name="meter_type_id" valueNumeric="20"/>
+            <column name="user_id" valueNumeric="25"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

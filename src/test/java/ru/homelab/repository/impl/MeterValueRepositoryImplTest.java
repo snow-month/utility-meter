@@ -34,7 +34,7 @@ class MeterValueRepositoryImplTest extends CreateContainerAndRunMigration {
 
     @Test
     void currentValue() throws NoValueException {
-        Integer value = meterValueRepository.currentValue(1, MeterTypeName.HEATING);
+        Integer value = meterValueRepository.currentValue(20L, MeterTypeName.HEATING);
         assertEquals(147, value);
     }
 
@@ -48,7 +48,7 @@ class MeterValueRepositoryImplTest extends CreateContainerAndRunMigration {
     @Test
     void valueForMonth() throws NoValueException {
         Integer value = meterValueRepository
-                .valueForMonth(2023, 6, MeterTypeName.HEATING, 1);
+                .valueForMonth(2023, 6, MeterTypeName.HEATING, 20);
         assertEquals(67, value);
     }
 
@@ -79,7 +79,7 @@ class MeterValueRepositoryImplTest extends CreateContainerAndRunMigration {
         int year = 2024;
         int month = 1;
         MeterTypeName meterTypeName = MeterTypeName.HEATING;
-        long userId = 2;
+        long userId = 25;
         Throwable exception = assertThrows(ValueAlreadyExistsException.class,
                 () -> meterValueRepository.addValue(value, year, month, meterTypeName, userId));
         assertEquals("Value already exists", exception.getMessage());
@@ -87,7 +87,7 @@ class MeterValueRepositoryImplTest extends CreateContainerAndRunMigration {
 
     @Test
     void allValuesUser() {
-        List<MeterValue> meterValues = meterValueRepository.allValuesUser(1L, MeterTypeName.HEATING);
+        List<MeterValue> meterValues = meterValueRepository.allValuesUser(20L, MeterTypeName.HEATING);
         assertEquals(5, meterValues.size());
     }
 

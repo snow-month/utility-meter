@@ -5,8 +5,13 @@
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <changeSet id="003-create-table-meter-value" author="homelab">
+        <createSequence sequenceName="meter_value_id_sequence"
+                        incrementBy="5"
+                        startValue="20"
+        />
+
         <createTable tableName="meter_value_liquibase" schemaName="company">
-            <column name="id" autoIncrement="true" type="SERIAL">
+            <column name="id" type="BIGINT" defaultValueSequenceNext="meter_value_id_sequence">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="value" type="INT">

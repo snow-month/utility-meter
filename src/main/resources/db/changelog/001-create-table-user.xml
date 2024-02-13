@@ -5,8 +5,13 @@
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
     <changeSet id="001-create-table-user" author="homelab">
+        <createSequence sequenceName="user_id_sequence"
+                        incrementBy="5"
+                        startValue="20"
+        />
+
         <createTable tableName="user_liquibase" schemaName="company">
-            <column name="id" autoIncrement="true" type="SERIAL">
+            <column name="id" type="BIGINT" defaultValueSequenceNext="user_id_sequence">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="login" type="VARCHAR(255)">
