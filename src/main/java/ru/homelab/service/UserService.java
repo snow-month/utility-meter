@@ -1,11 +1,12 @@
 package ru.homelab.service;
 
-import ru.homelab.dto.CreateUserDto;
+import ru.homelab.dto.UserDto;
 import ru.homelab.entity.User;
 import ru.homelab.exception.NoUserException;
 import ru.homelab.exception.ValidationException;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 /**
  * The interface User service.
@@ -21,5 +22,8 @@ public interface UserService {
     User getUserByLogin(String login) throws NoUserException;
 
 
-    Long create(CreateUserDto createUserDto) throws ValidationException, SQLException;
+    Long create(UserDto userDto) throws ValidationException, SQLException;
+
+    Optional<User> login(String login, String password) throws SQLException;
+
 }

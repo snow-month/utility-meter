@@ -46,9 +46,33 @@ public class HeatingController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            // todo
             meterValueService.addValue(22, MeterTypeName.HEATING);
         } catch (ValueAlreadyExistsException e) {
             throw new RuntimeException(e);
         }
     }
+
+    // todo читаем json post
+//    StringBuffer jb = new StringBuffer();
+//    String line = null;
+//  try {
+//        BufferedReader reader = request.getReader();
+//        while ((line = reader.readLine()) != null)
+//            jb.append(line);
+//    } catch (Exception e) { /*report an error*/ }
+
+//  try {
+//        JSONObject jsonObject =  HTTP.toJSONObject(jb.toString());
+//    } catch (JSONException e) {
+//         crash and burn
+//        throw new IOException("Error parsing JSON request string");
+//    }
+
+    // Work with the data using methods like...
+    // int someInt = jsonObject.getInt("intParamName");
+    // String someString = jsonObject.getString("stringParamName");
+    // JSONObject nestedObj = jsonObject.getJSONObject("nestedObjName");
+    // JSONArray arr = jsonObject.getJSONArray("arrayParamName");
+    // etc...
 }

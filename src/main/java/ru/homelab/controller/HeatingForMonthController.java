@@ -30,10 +30,10 @@ public class HeatingForMonthController extends HttpServlet {
         this.service = new MeterValueServiceImpl(meterValueRepository);
     }
 
+    // todo dopost не возвращает данные read json???
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
-        resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
         try (var printWriter = resp.getWriter()) {
             try {
                 String year = req.getParameter("year");

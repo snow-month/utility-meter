@@ -7,6 +7,7 @@ import ru.homelab.repository.UserRepository;
 import ru.homelab.service.DBConnectionProvider;
 
 import java.sql.*;
+import java.util.Optional;
 
 public class UserRepositoryImpl implements UserRepository {
     private final DBConnectionProvider dbConnectionProvider;
@@ -54,6 +55,27 @@ public class UserRepositoryImpl implements UserRepository {
             user.setId(id);
 
             return user;
+        }
+    }
+
+    @Override
+    public Optional<User> findByLoginAndPassword(String login, String password) throws SQLException {
+        try (Connection connection = dbConnectionProvider.getConnection()) {
+            PreparedStatement statement = connection
+                    .prepareStatement(
+                            "SELECT * FROM user_liquibase WHERE login = ? AND password = ?");
+            statement.setString(1, login);
+            statement.setString(2, password);
+
+            ResultSet resultSet = statement.executeQuery();
+            User user = null;
+            if (resultSet.next()) {
+                user = new User(resultSet.getLong("id"),
+                        resultSet.getString("login"),
+                        resultSet.getString("password"),
+                        Role.valueOf(resultSet.getString("role")));
+            }
+            return Optional.ofNullable(user);
         }
     }
 }

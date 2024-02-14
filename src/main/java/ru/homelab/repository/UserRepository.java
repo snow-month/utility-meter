@@ -4,6 +4,7 @@ import ru.homelab.entity.User;
 import ru.homelab.exception.NoUserException;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 /**
  * The interface User repository.
@@ -25,4 +26,6 @@ public interface UserRepository {
      * @return
      */
     User save(User user) throws SQLException;
+
+    Optional<User> findByLoginAndPassword(String login, String password) throws SQLException;
 }
