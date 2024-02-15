@@ -7,19 +7,22 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import ru.homelab.dto.UserDto;
 import ru.homelab.repository.UserRepository;
 import ru.homelab.repository.impl.UserRepositoryImpl;
 import ru.homelab.service.DBConnectionProvider;
 import ru.homelab.service.UserService;
 import ru.homelab.service.impl.DBConnectionProviderImpl;
 import ru.homelab.service.impl.UserServiceImpl;
-import ru.homelab.util.UrlPath;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-@WebServlet(UrlPath.LOGIN)
+import static ru.homelab.util.UrlPath.LOGIN;
+
+@WebServlet(LOGIN)
 public class LoginController extends HttpServlet {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -32,11 +35,11 @@ public class LoginController extends HttpServlet {
         resp.setContentType("application/json");
 
         try (var printWriter = resp.getWriter()) {
-            // todo читаем json
-            String login = req.getParameter("login");
-            String password = req.getParameter("password");
+            UserDto userDto = objectMapper.readValue(readJson(req), UserDto.class);
+            String login = userDto.getLogin();
+            String password = userDto.getPassword();
 
-            if (login.isEmpty() || password.isEmpty()) {
+            if (login == null || password == null || login.isEmpty() || password.isEmpty()) {
                 printWriter.println(objectMapper
                         .writeValueAsString("логин и пароль не должны быть пустыми"));
                 resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -54,6 +57,8 @@ public class LoginController extends HttpServlet {
                                             throw new RuntimeException(e);
                                         }
                                     });
+
+                    resp.setStatus(HttpServletResponse.SC_OK);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -65,5 +70,19 @@ public class LoginController extends HttpServlet {
         printWriter.println(objectMapper
                 .writeValueAsString("некорректный логин или пароль"));
         resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+    }
+
+    private String readJson(HttpServletRequest req) {
+        StringBuilder jb = new StringBuilder();
+        try {
+            String line;
+            BufferedReader reader = req.getReader();
+            while ((line = reader.readLine()) != null)
+                jb.append(line);
+        } catch (Exception e) {
+            System.out.println("sql exception, read json: " + e.getMessage());
+        }
+
+        return jb.toString();
     }
 }

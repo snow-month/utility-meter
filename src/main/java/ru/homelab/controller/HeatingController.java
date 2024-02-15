@@ -15,10 +15,12 @@ import ru.homelab.service.MeterValueService;
 import ru.homelab.service.impl.DBConnectionProviderImpl;
 import ru.homelab.service.impl.MeterValueServiceImpl;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
-@WebServlet("/heating")
+import static ru.homelab.util.UrlPath.HEATING;
+
+@WebServlet(HEATING)
 public class HeatingController extends HttpServlet {
     private MeterValueService meterValueService;
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -30,11 +32,9 @@ public class HeatingController extends HttpServlet {
         this.meterValueService = new MeterValueServiceImpl(meterValueRepository);
     }
 
-    //    // user, admin
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
-        resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
         try (var printWriter = resp.getWriter()) {
             var meterValueDtos = meterValueService.allValuesUser(MeterTypeName.HEATING);
             printWriter.println(objectMapper.writeValueAsString(meterValueDtos));
@@ -42,37 +42,28 @@ public class HeatingController extends HttpServlet {
         }
     }
 
-    // todo addValue
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            // todo
-            meterValueService.addValue(22, MeterTypeName.HEATING);
+            int value = Integer.parseInt(readJson(req));
+            meterValueService.addValue(value, MeterTypeName.HEATING);
+            resp.setStatus(HttpServletResponse.SC_OK);
         } catch (ValueAlreadyExistsException e) {
-            throw new RuntimeException(e);
+            resp.setStatus(HttpServletResponse.SC_CONFLICT);
         }
     }
 
-    // todo читаем json post
-//    StringBuffer jb = new StringBuffer();
-//    String line = null;
-//  try {
-//        BufferedReader reader = request.getReader();
-//        while ((line = reader.readLine()) != null)
-//            jb.append(line);
-//    } catch (Exception e) { /*report an error*/ }
+    private String readJson(HttpServletRequest req) {
+        StringBuilder jb = new StringBuilder();
+        try {
+            String line;
+            BufferedReader reader = req.getReader();
+            while ((line = reader.readLine()) != null)
+                jb.append(line);
+        } catch (Exception e) {
+            System.out.println("sql exception, read json: " + e.getMessage());
+        }
 
-//  try {
-//        JSONObject jsonObject =  HTTP.toJSONObject(jb.toString());
-//    } catch (JSONException e) {
-//         crash and burn
-//        throw new IOException("Error parsing JSON request string");
-//    }
-
-    // Work with the data using methods like...
-    // int someInt = jsonObject.getInt("intParamName");
-    // String someString = jsonObject.getString("stringParamName");
-    // JSONObject nestedObj = jsonObject.getJSONObject("nestedObjName");
-    // JSONArray arr = jsonObject.getJSONArray("arrayParamName");
-    // etc...
+        return jb.toString();
+    }
 }

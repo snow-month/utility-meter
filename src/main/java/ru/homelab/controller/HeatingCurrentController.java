@@ -16,9 +16,10 @@ import ru.homelab.service.impl.DBConnectionProviderImpl;
 import ru.homelab.service.impl.MeterValueServiceImpl;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
-@WebServlet("/heating/current")
+import static ru.homelab.util.UrlPath.HEATING_CURRENT;
+
+@WebServlet(HEATING_CURRENT)
 public class HeatingCurrentController extends HttpServlet {
     private final ObjectMapper objectMapper = new ObjectMapper();
     private MeterValueService service;
@@ -33,7 +34,6 @@ public class HeatingCurrentController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
-        resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
         try (var printWriter = resp.getWriter()) {
             try {
                 Integer value = service.currentValue(MeterTypeName.HEATING);

@@ -15,7 +15,10 @@ import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
     private final CreateUserValidator validator = new CreateUserValidator();
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
+
+    public UserServiceImpl() {
+    }
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;

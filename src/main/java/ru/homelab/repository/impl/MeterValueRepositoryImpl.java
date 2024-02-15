@@ -15,7 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MeterValueRepositoryImpl implements MeterValueRepository {
-    private final DBConnectionProvider dbConnectionProvider;
+    private DBConnectionProvider dbConnectionProvider;
+
+    public MeterValueRepositoryImpl() {
+    }
 
     public MeterValueRepositoryImpl(DBConnectionProvider dbConnectionProvider) {
         this.dbConnectionProvider = dbConnectionProvider;

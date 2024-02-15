@@ -11,9 +11,9 @@ repositories {
     mavenCentral()
 }
 
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
-}
+//tasks.withType(JavaCompile) {
+//    options.encoding = 'UTF-8'
+//}
 
 dependencies {
     compileOnly('jakarta.servlet:jakarta.servlet-api:6.0.0')
@@ -22,14 +22,18 @@ dependencies {
     implementation('org.postgresql:postgresql:42.6.0')
     implementation('org.liquibase:liquibase-core:4.23.0')
     implementation('com.mchange:c3p0:0.9.5.4')
-    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+    implementation('org.mapstruct:mapstruct:1.5.5.Final')
+    annotationProcessor('org.mapstruct:mapstruct-processor:1.5.5.Final')
 
     testImplementation platform('org.junit:junit-bom:5.9.2')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testImplementation "org.testcontainers:testcontainers:1.19.4"
-    testImplementation "org.testcontainers:junit-jupiter:1.19.4"
-    testImplementation "org.testcontainers:postgresql:1.19.4"
+    testImplementation('org.junit.jupiter:junit-jupiter')
+    testImplementation('org.testcontainers:testcontainers:1.19.4')
+    testImplementation('org.testcontainers:junit-jupiter:1.19.4')
+    testImplementation('org.testcontainers:postgresql:1.19.4')
+    testImplementation('org.mockito:mockito-core:5.10.0')
+    testImplementation('org.mockito:mockito-junit-jupiter:5.10.0')
+
+    testImplementation('jakarta.servlet:jakarta.servlet-api:6.0.0')
 }
 
 test {

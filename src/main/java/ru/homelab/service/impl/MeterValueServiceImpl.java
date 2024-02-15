@@ -12,7 +12,10 @@ import java.util.Calendar;
 import java.util.List;
 
 public class MeterValueServiceImpl implements MeterValueService {
-    private final MeterValueRepository meterValueRepository;
+    private MeterValueRepository meterValueRepository;
+
+    public MeterValueServiceImpl() {
+    }
 
     public MeterValueServiceImpl(MeterValueRepository meterValueRepository) {
         this.meterValueRepository = meterValueRepository;
