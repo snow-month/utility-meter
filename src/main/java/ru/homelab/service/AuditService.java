@@ -1,7 +1,6 @@
 package ru.homelab.service;
 
 import ru.homelab.entity.Audit;
-import ru.homelab.entity.MessageAudit;
 
 import java.util.List;
 
@@ -12,9 +11,9 @@ public interface AuditService {
     /**
      * Save.
      *
-     * @param messageAudit the message audit
+     * @param message the message audit
      */
-    void save(MessageAudit messageAudit);
+    void save(String message);
 
     /**
      * Gets all.

@@ -3,7 +3,6 @@ package ru.homelab.repository.impl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.homelab.entity.Audit;
-import ru.homelab.entity.MessageAudit;
 import ru.homelab.repository.AuditRepository;
 import ru.homelab.repository.CreateContainerAndRunMigration;
 import ru.homelab.service.DBConnectionProvider;
@@ -33,7 +32,7 @@ class AuditRepositoryImplTest extends CreateContainerAndRunMigration {
     @Test
     void getAll() {
         auditRepository.save(new Audit(new Date().toString(),
-                MessageAudit.CREATE_NEW_USER.toString(), 1L));
+                "получение всех значений отопления", 1L));
         List<Audit> audits = auditRepository.getAll();
         assertEquals(1, audits.size());
     }

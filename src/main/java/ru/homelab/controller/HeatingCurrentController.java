@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import ru.homelab.aspect.logging.Logging;
 import ru.homelab.entity.MeterTypeName;
 import ru.homelab.exception.NoValueException;
 import ru.homelab.repository.MeterValueRepository;
@@ -31,6 +32,7 @@ public class HeatingCurrentController extends HttpServlet {
         this.service = new MeterValueServiceImpl(meterValueRepository);
     }
 
+    @Logging(message = "получение текущего значения отопления")
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");

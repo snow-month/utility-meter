@@ -1,5 +1,6 @@
 package ru.homelab.service.impl;
 
+import ru.homelab.aspect.logging.Logging;
 import ru.homelab.dto.UserDto;
 import ru.homelab.entity.User;
 import ru.homelab.exception.NoUserException;

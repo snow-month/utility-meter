@@ -1,7 +1,6 @@
 package ru.homelab.service.impl;
 
 import ru.homelab.entity.Audit;
-import ru.homelab.entity.MessageAudit;
 import ru.homelab.repository.AuditRepository;
 import ru.homelab.service.AuditService;
 
@@ -24,15 +23,20 @@ public class AuditServiceImpl implements AuditService {
     }
 
     @Override
-    public void save(MessageAudit messageAudit) {
+    public void save(String message) {
         String date = new Date().toString();
-        long userId = AuthorizationService.CURRENT_USER.get().getId();
-        Audit audit = new Audit(date, messageAudit.name(), userId);
+        long userId = currentUserId();
+        Audit audit = new Audit(date, message, userId);
         auditRepository.save(audit);
     }
 
     @Override
     public List<Audit> getAll() {
         return auditRepository.getAll();
+    }
+
+    private static Long currentUserId() {
+//        return AuthorizationService.CURRENT_USER.get().getId();
+        return 20L;
     }
 }

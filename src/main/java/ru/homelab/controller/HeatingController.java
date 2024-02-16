@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import ru.homelab.aspect.logging.Logging;
 import ru.homelab.entity.MeterTypeName;
 import ru.homelab.exception.ValueAlreadyExistsException;
 import ru.homelab.repository.MeterValueRepository;
@@ -32,6 +33,7 @@ public class HeatingController extends HttpServlet {
         this.meterValueService = new MeterValueServiceImpl(meterValueRepository);
     }
 
+    @Logging(message = "получение всех значений отопления")
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
@@ -42,6 +44,7 @@ public class HeatingController extends HttpServlet {
         }
     }
 
+    @Logging(message = "добавление значения отопления")
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {

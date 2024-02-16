@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import ru.homelab.aspect.logging.Logging;
 import ru.homelab.dto.DataDto;
 import ru.homelab.entity.MeterTypeName;
 import ru.homelab.exception.NoValueException;
@@ -33,6 +34,7 @@ public class HeatingForMonthController extends HttpServlet {
         this.service = new MeterValueServiceImpl(meterValueRepository);
     }
 
+    @Logging(message = "получение значения отопления за месяц")
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json");
