@@ -34,6 +34,7 @@ public class DBConnectionProviderImpl implements DBConnectionProvider {
             cpds.setJdbcUrl(PropertiesService.get(URL_KEY));
             cpds.setUser(PropertiesService.get(USERNAME_KEY));
             cpds.setPassword(PropertiesService.get(PASSWORD_KEY));
+            cpds.setCheckoutTimeout(1);
         } catch (PropertyVetoException e) {
             throw new RuntimeException("sql exception, load driver Postgresql: " + e.getMessage());
         }
